@@ -799,18 +799,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jdion/tilt-react@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@jdion/tilt-react@npm:1.0.0"
-  peerDependencies:
-    "@types/react": ^18.0.29
-    "@types/react-dom": ^18.0.11
-    react: ^18.2.0
-    react-dom: ^18.2.0
-  checksum: 10c0/9d1f5e9e193f71b3188abbdba0ac13c29b21c3c86ba7470d651d19ae5eadab864b803e4f58a637ce5d1bf105dc6a4f9d694fd556395e67e647f96b40f170e0ac
-  languageName: node
-  linkType: hard
-
 "@jridgewell/gen-mapping@npm:^0.3.2, @jridgewell/gen-mapping@npm:^0.3.5":
   version: 0.3.8
   resolution: "@jridgewell/gen-mapping@npm:0.3.8"
@@ -1425,13 +1413,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/add@npm:^2":
-  version: 2.0.3
-  resolution: "@types/add@npm:2.0.3"
-  checksum: 10c0/d18841b43d3799f69db0bdae380d19d05f43b716315c5bfd4d6c1b3467bada2644eab8c04bb5afdb94bba87604da06d466f22fe30df6bcf0518c373593bb474a
-  languageName: node
-  linkType: hard
-
 "@types/babel__core@npm:^7.20.5":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -1686,13 +1667,6 @@ __metadata:
   bin:
     acorn: bin/acorn
   checksum: 10c0/6d4ee461a7734b2f48836ee0fbb752903606e576cc100eb49340295129ca0b452f3ba91ddd4424a1d4406a98adfb2ebb6bd0ff4c49d7a0930c10e462719bbfd7
-  languageName: node
-  linkType: hard
-
-"add@npm:^2.0.6":
-  version: 2.0.6
-  resolution: "add@npm:2.0.6"
-  checksum: 10c0/6b21d5f2e58cf5e15d56cc6f9ebce04f04f4c33ae25f09d600ddacf8df00036ba521f17feb1b3f81307b7c6d2ef0bed8b511a0f86f062eb90c2f909b48b588ae
   languageName: node
   linkType: hard
 
@@ -2087,23 +2061,6 @@ __metadata:
     strip-ansi: "npm:^6.0.1"
     wrap-ansi: "npm:^7.0.0"
   checksum: 10c0/4bda0f09c340cbb6dfdc1ed508b3ca080f12992c18d68c6be4d9cf51756033d5266e61ec57529e610dacbf4da1c634423b0c1b11037709cc6b09045cbd815df5
-  languageName: node
-  linkType: hard
-
-"clsc@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "clsc@npm:1.0.3"
-  dependencies:
-    clsx: "npm:^1.1.1"
-    react: "npm:17.0.2"
-  checksum: 10c0/2a8d3b4dd7491a7f5d2316f4caec80d762f85b8d33bcf6c6f8da8c568310152ab668897c689ba5121b0eada325d7198d4516e27dfb38f87bcadf49ad004030e6
-  languageName: node
-  linkType: hard
-
-"clsx@npm:^1.1.1":
-  version: 1.2.1
-  resolution: "clsx@npm:1.2.1"
-  checksum: 10c0/34dead8bee24f5e96f6e7937d711978380647e936a22e76380290e35486afd8634966ce300fc4b74a32f3762c7d4c0303f442c3e259f4ce02374eb0c82834f27
   languageName: node
   linkType: hard
 
@@ -3803,13 +3760,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jquery@npm:^3.1.1":
-  version: 3.7.1
-  resolution: "jquery@npm:3.7.1"
-  checksum: 10c0/808cfbfb758438560224bf26e17fcd5afc7419170230c810dd11f5c1792e2263e2970cca8d659eb84fcd9acc301edb6d310096e450277d54be4f57071b0c82d9
-  languageName: node
-  linkType: hard
-
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -4066,7 +4016,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -4604,13 +4554,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"photoswipe@npm:^5.4.4":
-  version: 5.4.4
-  resolution: "photoswipe@npm:5.4.4"
-  checksum: 10c0/9a62a8ee4b87564f3d2067edfd7f168d07973e1e37b21cd4f548363b441d8192991a88d272a0f299de0e7c773e6c74367ebcf895f0e60ca919d52e1d2f3b0355
-  languageName: node
-  linkType: hard
-
 "picocolors@npm:^1.0.1, picocolors@npm:^1.1.1":
   version: 1.1.1
   resolution: "picocolors@npm:1.1.1"
@@ -4855,56 +4798,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prtfl-io@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "prtfl-io@workspace:."
-  dependencies:
-    "@formkit/auto-animate": "npm:^0.8.2"
-    "@jdion/tilt-react": "npm:^1.0.0"
-    "@tailwindcss/typography": "npm:^0.5.16"
-    "@tailwindcss/vite": "npm:^4.1.5"
-    "@types/add": "npm:^2"
-    "@types/eslint-config-prettier": "npm:^6.11.3"
-    "@types/node": "npm:^22.13.5"
-    "@types/react": "npm:^19"
-    "@types/react-dom": "npm:^19"
-    "@vitejs/plugin-react": "npm:^4.4.1"
-    add: "npm:^2.0.6"
-    autoprefixer: "npm:^10.4.20"
-    clsc: "npm:^1.0.3"
-    clsx: "npm:^2.1.1"
-    cross-env: "npm:^7.0.3"
-    eslint: "npm:^9.21.0"
-    eslint-config-prettier: "npm:^10.0.1"
-    eslint-plugin-prettier: "npm:^5.2.3"
-    eslint-plugin-react: "npm:^7.37.4"
-    eslint-plugin-react-hooks: "npm:^5.1.0"
-    eslint-plugin-tailwindcss: "npm:^3.18.0"
-    framer-motion: "npm:^12.9.4"
-    jotai: "npm:^2.12.1"
-    lovable-tagger: "npm:^1.1.8"
-    photoswipe: "npm:^5.4.4"
-    prettier: "npm:^3.5.3"
-    prettier-plugin-tailwindcss: "npm:^0.6.11"
-    react: "npm:^19.1.0"
-    react-dom: "npm:^19.1.0"
-    react-medium-image-zoom: "npm:^5.2.14"
-    react-photoswipe-gallery: "npm:^3.1.1"
-    react-router: "npm:^7.5.3"
-    rollup-plugin-visualizer: "npm:^5.14.0"
-    tailwind-merge: "npm:^3.3.0"
-    tailwindcss: "npm:^4.1.5"
-    tilt.js: "npm:^1.2.1"
-    ts-node: "npm:^10.9.2"
-    typescript: "npm:^5.7.3"
-    typescript-eslint: "npm:^8.24.1"
-    use-long-press: "npm:^3.3.0"
-    vite: "npm:^6.1.1"
-    vite-plugin-svgr: "npm:^4.3.0"
-    vite-tsconfig-paths: "npm:^5.1.4"
-  languageName: unknown
-  linkType: soft
-
 "punycode@npm:^2.1.0":
   version: 2.3.1
   resolution: "punycode@npm:2.3.1"
@@ -4937,27 +4830,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-medium-image-zoom@npm:^5.2.14":
-  version: 5.2.14
-  resolution: "react-medium-image-zoom@npm:5.2.14"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/016cf62e01c930bc773bc856f5f3c5e4b0ebb3df0760d0549dda9d60e80e7716b094b11729b6f8e8edbd096d0f5cecefa749161ec48e53c94a464ab9791fd025
-  languageName: node
-  linkType: hard
-
-"react-photoswipe-gallery@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "react-photoswipe-gallery@npm:3.1.1"
-  peerDependencies:
-    photoswipe: ">= 5.2.2"
-    prop-types: ">= 15.7.0"
-    react: ">= 16.8.0"
-  checksum: 10c0/36603cdb8ea62342290af950b0c40b609e2b42d77ffe0095e84de61eea74347d6598be55138f90b6548f7b18bbf73fc42c4c349659f41b4a19a07bb5ca20f9ff
-  languageName: node
-  linkType: hard
-
 "react-refresh@npm:^0.17.0":
   version: 0.17.0
   resolution: "react-refresh@npm:0.17.0"
@@ -4979,16 +4851,6 @@ __metadata:
     react-dom:
       optional: true
   checksum: 10c0/1f98ab5974cbf6696944a3cbe3d5708add6cdb9c765e0952459eb912d388fe361914a94557546dcd45164413fd9bc2fde97302c8daf3951156644232a9e3ce16
-  languageName: node
-  linkType: hard
-
-"react@npm:17.0.2":
-  version: 17.0.2
-  resolution: "react@npm:17.0.2"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-    object-assign: "npm:^4.1.1"
-  checksum: 10c0/07ae8959acf1596f0550685102fd6097d461a54a4fd46a50f88a0cd7daaa97fdd6415de1dcb4bfe0da6aa43221a6746ce380410fa848acc60f8ac41f6649c148
   languageName: node
   linkType: hard
 
@@ -5126,6 +4988,48 @@ __metadata:
   checksum: 10c0/c19ef26e4e188f408922c46f7ff480d38e8dfc55d448310dfb518736b23ed2c4f547fb64a6ed5bdba92cd7e7ddc889d36ff78f794816d5e71498d645ef476107
   languageName: node
   linkType: hard
+
+"rich-rekt@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "rich-rekt@workspace:."
+  dependencies:
+    "@formkit/auto-animate": "npm:^0.8.2"
+    "@tailwindcss/typography": "npm:^0.5.16"
+    "@tailwindcss/vite": "npm:^4.1.5"
+    "@types/eslint-config-prettier": "npm:^6.11.3"
+    "@types/node": "npm:^22.13.5"
+    "@types/react": "npm:^19"
+    "@types/react-dom": "npm:^19"
+    "@vitejs/plugin-react": "npm:^4.4.1"
+    autoprefixer: "npm:^10.4.20"
+    clsx: "npm:^2.1.1"
+    cross-env: "npm:^7.0.3"
+    eslint: "npm:^9.21.0"
+    eslint-config-prettier: "npm:^10.0.1"
+    eslint-plugin-prettier: "npm:^5.2.3"
+    eslint-plugin-react: "npm:^7.37.4"
+    eslint-plugin-react-hooks: "npm:^5.1.0"
+    eslint-plugin-tailwindcss: "npm:^3.18.0"
+    framer-motion: "npm:^12.9.4"
+    jotai: "npm:^2.12.1"
+    lovable-tagger: "npm:^1.1.8"
+    prettier: "npm:^3.5.3"
+    prettier-plugin-tailwindcss: "npm:^0.6.11"
+    react: "npm:^19.1.0"
+    react-dom: "npm:^19.1.0"
+    react-router: "npm:^7.5.3"
+    rollup-plugin-visualizer: "npm:^5.14.0"
+    tailwind-merge: "npm:^3.3.0"
+    tailwindcss: "npm:^4.1.5"
+    ts-node: "npm:^10.9.2"
+    typescript: "npm:^5.7.3"
+    typescript-eslint: "npm:^8.24.1"
+    use-long-press: "npm:^3.3.0"
+    vite: "npm:^6.1.1"
+    vite-plugin-svgr: "npm:^4.3.0"
+    vite-tsconfig-paths: "npm:^5.1.4"
+  languageName: unknown
+  linkType: soft
 
 "rimraf@npm:^5.0.5":
   version: 5.0.10
@@ -5740,15 +5644,6 @@ __metadata:
   dependencies:
     any-promise: "npm:^1.0.0"
   checksum: 10c0/f375aeb2b05c100a456a30bc3ed07ef03a39cbdefe02e0403fb714b8c7e57eeaad1a2f5c4ecfb9ce554ce3db9c2b024eba144843cd9e344566d9fcee73b04767
-  languageName: node
-  linkType: hard
-
-"tilt.js@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "tilt.js@npm:1.2.1"
-  dependencies:
-    jquery: "npm:^3.1.1"
-  checksum: 10c0/b15237012d977816b6284d399da7e43b04e3d438a3488ef1b3488ea47be27b9100472f4703a07ae3137668fab27c78cf46563af0a77ac54b4f666619d8b6c9de
   languageName: node
   linkType: hard
 

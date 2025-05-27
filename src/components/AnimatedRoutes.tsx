@@ -1,6 +1,5 @@
+import Leaderboard from 'pages/Leaderboard'
 import MainPage from 'pages/Main'
-import ProfilePage from 'pages/Profile'
-import WorkPage from 'pages/Work'
 import { Route, Routes, useLocation } from 'react-router'
 
 export default function AnimatedRoutes() {
@@ -9,8 +8,7 @@ export default function AnimatedRoutes() {
   return (
     <Routes location={location} key={location.pathname}>
       <Route path="/" element={<MainPage />} />
-      <Route path="profile" element={<ProfilePage />} />
-      <Route path="work/:id?" element={<WorkPage />} />
+      <Route path="leaderboard" element={<Leaderboard />} />
     </Routes>
   )
 }

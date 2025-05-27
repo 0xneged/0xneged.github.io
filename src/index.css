@@ -1,11 +1,12 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-accent: #ffcc33;
-  --color-selection: #c79400;
-
-  --color-white-pale: #ede4dc;
-  --color-dark-pale: #181a1b;
+  --color-accent: #413d85;
+  --color-background: #0f0d26;
+  --color-accent-bright: #7118f7;
+  --color-accent-pale: #645a8b;
+  --color-alt: #e5aa46;
+  --color-selection: #e5aa4650;
 
   --shadow-card: 0 0 15px 6px rgb(0 0 0 / 0.25);
 
@@ -70,7 +71,6 @@ a[target='_blank']:after {
     background: transparent url('/img/noise.png') repeat 0 0;
     background-repeat: repeat;
     background-size: 250px 250px;
-    /* animation: bg-animation 0.55 s infinite; */
     opacity: 0.9;
     visibility: visible;
     will-change: transform;
@@ -79,28 +79,6 @@ a[target='_blank']:after {
 
   .writing-sideways-lr {
     writing-mode: sideways-lr;
-  }
-
-  .bg-stripes {
-    background: repeating-linear-gradient(
-      45deg,
-      transparent 0px,
-      transparent 2px,
-      #00000050 2px,
-      #00000050 3px
-    );
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .bg-stripes {
-      background: repeating-linear-gradient(
-        45deg,
-        transparent 0px,
-        transparent 2px,
-        #ffffff50 2px,
-        #ffffff50 3px
-      );
-    }
   }
 
   .bg-isometric {
@@ -112,11 +90,6 @@ a[target='_blank']:after {
     height: 100%;
     background: linear-gradient(20deg, black, transparent), var(--noise-svg);
     filter: contrast(170%) brightness(1000%);
-  }
-
-  .windy-animation {
-    animation: windy-image 2s infinite alternate;
-    transform-origin: center bottom;
   }
 }
 
@@ -136,48 +109,6 @@ span {
   scrollbar-width: none !important;
   width: 0 !important;
   background: none !important;
-}
-
-@keyframes windy-image {
-  to {
-    transform: skewX(-7deg);
-  }
-}
-
-@keyframes bg-animation {
-  0% {
-    transform: translate(0, 0);
-  }
-  10% {
-    transform: translate(-5%, -5%);
-  }
-  20% {
-    transform: translate(-10%, 5%);
-  }
-  30% {
-    transform: translate(5%, -10%);
-  }
-  40% {
-    transform: translate(-5%, 15%);
-  }
-  50% {
-    transform: translate(-10%, 5%);
-  }
-  60% {
-    transform: translate(15%, 0);
-  }
-  70% {
-    transform: translate(0, 10%);
-  }
-  80% {
-    transform: translate(-15%, 0);
-  }
-  90% {
-    transform: translate(10%, 5%);
-  }
-  100% {
-    transform: translate(5%, 0);
-  }
 }
 
 div[data-rmiz-modal-overlay='visible'] {
