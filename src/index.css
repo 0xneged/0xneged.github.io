@@ -1,16 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --color-accent: #413d85;
+  --color-accent: #2c257f;
   --color-background: #0f0d26;
-  --color-accent-bright: #7118f7;
+  --color-accent-bright: #4036aa;
   --color-accent-pale: #645a8b;
+  --color-accent-semidark: #1b1758;
   --color-alt: #e5aa46;
+  --color-alt-bright: #d6b196;
   --color-selection: #e5aa4650;
 
   --shadow-card: 0 0 15px 6px rgb(0 0 0 / 0.25);
 
   --noise-svg: url('/img/noise-filter.svg');
+
+  --font-serif: 'Faculty Glyphic', sans-serif;
 }
 
 * {
@@ -24,29 +29,8 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-body::before {
-  position: fixed;
-  left: 0;
-  top: 0;
-  background: url(/img/bgTexture.jpg) 0 0;
-  background-size: 500px 500px;
-  content: '';
-  width: 100%;
-  height: calc(100% + 100px);
-  z-index: 0;
-  pointer-events: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color: var(--color-white-pale);
-    background-color: var(--color-dark-pale);
-  }
-  body::before {
-    background-image: none;
-  }
+  background: url('/img/bg.webp') repeat center center fixed;
 }
 
 a:hover {
