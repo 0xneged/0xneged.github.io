@@ -2,7 +2,7 @@
   "name": "rich-rekt",
   "version": "1.0.0",
   "license": "MIT",
-  "homepage": "https://t-damer.0xneged.io/rich-rekt",
+  "homepage": "https://0xneged.github.io/rich-rekt",
   "type": "module",
   "scripts": {
     "start": "vite",
