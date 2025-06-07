@@ -12,9 +12,6 @@ jobs:
         with:
           node-version: 22
           cache: 'yarn'
-      - name: Install modules
-        run: yarn
-      - name: Build code
-        run: yarn build
-      - name: Lint code
-        run: yarn lint
+      - run: yarn
+      - run: yarn build
+      - run: yarn lint
