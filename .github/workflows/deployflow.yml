@@ -16,12 +16,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     
-    # Add debug information
+    # Environment variables
     env:
       GITHUB_REF: ${{ github.ref }}
       GITHUB_EVENT_NAME: ${{ github.event_name }}
       GITHUB_ACTOR: ${{ github.actor }}
-    env:
       NODE_OPTIONS: '--max_old_space_size=4096'
     steps:
       - name: Debug Info
