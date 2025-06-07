@@ -7,13 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          bun-version: 'latest'
+          node-version: 22
+          cache: 'yarn'
       - name: Install modules
-        run: bun install
+        run: yarn
       - name: Build code
-        run: bun run build
+        run: yarn build
       - name: Lint code
-        run: bun run lint
+        run: yarn lint
