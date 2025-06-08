@@ -4,8 +4,10 @@ import { settleGame } from 'helpers/api/backend'
 import { richRektContractData } from 'helpers/api/contract'
 import handleError from 'helpers/handleError'
 import useAnimatedLongPress from 'helpers/hooks/useAnimatedLongPress'
+import { usePlayer } from 'helpers/hooks/useContract'
 import { config } from 'helpers/wagmiConnector'
 import { useCallback, useState } from 'react'
+import { toast } from 'react-toastify'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount, useConnect, useReadContract } from 'wagmi'
 
@@ -14,13 +16,9 @@ const oneDay = 1000 * 60 * 60 * 24
 function MainInner({ address }: { address: EthAddressString }) {
   const [loading, setLoading] = useState(false)
 
-  // [lastPlayed, points, referrer]
-  const { data: player } = useReadContract({
-    ...richRektContractData,
-    functionName: 'getPlayer',
-    args: [address as EthAddressString],
-  })
-  const canPlay = player ? Number(player[0]) * 1000 > Date.now() - oneDay : true
+  const { lastPlayed } = usePlayer(address)
+
+  const canPlay = lastPlayed ? Number(lastPlayed) > Date.now() - oneDay : true
 
   const { data: hasPendingRequest } = useReadContract({
     ...richRektContractData,
@@ -43,7 +41,11 @@ function MainInner({ address }: { address: EthAddressString }) {
         account: address,
       })
 
-      await settleGame({ address, signature })
+      const {
+        data: { newPoints, reward },
+      } = await settleGame({ address, signature })
+      // TODO: invalidate queries or save proper states
+      toast.success(`Nice, your reward is ${reward}`)
     } catch (e) {
       handleError({ e, toastMessage: 'Failed to play :(' })
     } finally {

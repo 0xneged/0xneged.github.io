@@ -5,10 +5,10 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@0xneged/rich-rekt-contract@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@0xneged/rich-rekt-contract@npm:1.1.1"
-  checksum: 10c0/9cc19f0e261a76744fb4e13d97582c11542c0868ca70af68d40c5179b4cd1e154ded98c43f2687f0085ba3938e5c69f4fdd767220cf983e963eab460a577d94a
+"@0xneged/rich-rekt-contract@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@0xneged/rich-rekt-contract@npm:1.2.0"
+  checksum: 10c0/7ea4e1922d68ff81d2a3829a5dc53c3e24727d3a39ea4340acce6aeb0a21e4b56cc3793e7d8e4fc24f8d31db388745823f598958270d090bdc11fc42807aa84c
   languageName: node
   linkType: hard
 
@@ -7563,7 +7563,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "rich-rekt@workspace:."
   dependencies:
-    "@0xneged/rich-rekt-contract": "npm:^1.1.1"
+    "@0xneged/rich-rekt-contract": "npm:^1.2.0"
     "@farcaster/frame-sdk": "npm:^0.0.60"
     "@farcaster/frame-wagmi-connector": "npm:^0.0.49"
     "@formkit/auto-animate": "npm:^0.8.2"
