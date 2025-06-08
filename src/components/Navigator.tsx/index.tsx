@@ -26,7 +26,7 @@ export default function Navigator() {
   const [parent] = useAutoAnimate()
 
   return (
-    <nav className="flex h-16 w-full flex-row items-center" ref={parent}>
+    <nav className="flex w-full flex-row items-center" ref={parent}>
       {routes.map((props) => (
         <RouteCard key={props.text + props.href} {...props} />
       ))}

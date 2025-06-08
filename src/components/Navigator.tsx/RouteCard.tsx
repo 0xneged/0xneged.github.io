@@ -18,7 +18,7 @@ export default function RouteCard({
         cn(
           isActive ? 'flex-3' : 'flex-1',
           isActive ? 'text-alt bg-accent-bright' : 'text-accent-pale',
-          'flex w-full items-center justify-center gap-1 rounded-md p-2 transition-all'
+          'flex h-20 w-full items-center justify-center gap-1 rounded-t-md p-2 transition-all'
         )
       }
       title={text}

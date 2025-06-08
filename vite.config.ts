@@ -17,6 +17,9 @@ export default defineConfig({
     isDev && componentTagger(),
   ],
   base: '/rich-rekt/',
+  server: {
+    allowedHosts: ['.trycloudflare.com'],
+  },
   build: {
     rollupOptions: {
       plugins: [

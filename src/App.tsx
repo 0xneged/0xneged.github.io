@@ -25,8 +25,8 @@ export default function App() {
         closeOnClick
         closeButton={false}
         autoClose={3000}
-        theme="dark"
-        // toastClassName="!bg-tertiary !rounded-xl !w-[96dvw] !ml-[2dvw] md:!w-full md:!ml-auto !max-w-prose !shadow-super !top-4 !font-semibold"
+        theme="light"
+        toastClassName="!w-screen !ml-[18.5dvw] !font-semibold"
         draggableDirection="x"
         hideProgressBar
         limit={3}

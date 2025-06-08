@@ -1,35 +1,105 @@
+import { signMessage, writeContract } from '@wagmi/core'
 import RoundButton from 'components/RoundButton'
-import { useLongPress } from 'use-long-press'
-import { useAccount, useConnect } from 'wagmi'
+import { settleGame } from 'helpers/api/backend'
+import { richRektContractData } from 'helpers/api/contract'
+import handleError from 'helpers/handleError'
+import useAnimatedLongPress from 'helpers/hooks/useAnimatedLongPress'
+import { config } from 'helpers/wagmiConnector'
+import { useCallback, useState } from 'react'
+import { EthAddressString } from 'types/Blockchain'
+import { useAccount, useConnect, useReadContract } from 'wagmi'
 
-export default function MainPage() {
-  const { isConnected } = useAccount()
-  const { connect, connectors } = useConnect()
-  const longPressHandler = useLongPress(() => {
-    console.log('long press')
+const oneDay = 1000 * 60 * 60 * 24
+
+function MainInner({ address }: { address: EthAddressString }) {
+  const [loading, setLoading] = useState(false)
+
+  // [lastPlayed, points, referrer]
+  const { data: player } = useReadContract({
+    ...richRektContractData,
+    functionName: 'getPlayer',
+    args: [address as EthAddressString],
+  })
+  const canPlay = player ? Number(player[0]) * 1000 > Date.now() - oneDay : true
+
+  const { data: hasPendingRequest } = useReadContract({
+    ...richRektContractData,
+    functionName: 'hasPendingRequest',
+    args: [address as EthAddressString],
+  })
+
+  const handleGame = useCallback(async () => {
+    try {
+      setLoading(true)
+      if (!hasPendingRequest) {
+        await writeContract(config, {
+          ...richRektContractData,
+          functionName: 'requestPlay',
+          args: [address as EthAddressString],
+        })
+      }
+      const signature = await signMessage(config, {
+        message: `Oh, random, may I be a winner`,
+        account: address,
+      })
+
+      await settleGame({ address, signature })
+    } catch (e) {
+      handleError({ e, toastMessage: 'Failed to play :(' })
+    } finally {
+      setLoading(false)
+    }
+  }, [address, hasPendingRequest])
+
+  const { longPressHandler, pressProgress } = useAnimatedLongPress({
+    callback: handleGame,
+    disabled: loading || !canPlay,
   })
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-between overflow-y-auto pb-4 md:py-8">
+    <RoundButton
+      {...longPressHandler()}
+      onContextMenu={(e) => e.preventDefault()}
+      style={{
+        filter: `drop-shadow(0 ${0.75 * (1 - pressProgress)}rem 0 #1b1758)`,
+        transform: `translateY(${pressProgress * 0.75}rem) rotateX(25deg)`,
+      }}
+    >
+      {loading ? (
+        <p>Playing...</p>
+      ) : hasPendingRequest ? (
+        <p>Hold again</p>
+      ) : canPlay ? (
+        <>
+          <p>HOLD</p>
+          <p>ME</p>
+        </>
+      ) : (
+        <p>Play again in 24h</p>
+      )}
+    </RoundButton>
+  )
+}
+
+export default function MainPage() {
+  const { isConnected, address } = useAccount()
+  const { connect, connectors } = useConnect()
+
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-between overflow-y-auto py-4">
       <h1
-        className="text-accent text-center font-serif text-6xl"
+        className="text-accent text-center font-serif text-5xl"
         style={{
           WebkitTextStrokeWidth: '1.5px',
           WebkitTextStrokeColor: 'var(--color-accent-bright)',
         }}
       >
         <p>RICH</p>
-        <p className="text-3xl">OR</p>
+        <p className="text-2xl">OR</p>
         <p>REKT</p>
       </h1>
-      {isConnected ? (
-        <RoundButton
-          {...longPressHandler()}
-          onContextMenu={(e) => e.preventDefault()}
-        >
-          <p>HOLD</p>
-          <p>ME</p>
-        </RoundButton>
+      {isConnected && address ? (
+        <MainInner address={address} />
       ) : (
         <RoundButton onClick={() => connect({ connector: connectors[0] })}>
           Connect
