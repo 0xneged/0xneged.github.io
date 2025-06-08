@@ -10,6 +10,7 @@ import { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount, useConnect, useReadContract } from 'wagmi'
+import { base } from 'wagmi/chains'
 
 const oneDay = 1000 * 60 * 60 * 24
 
@@ -22,6 +23,7 @@ function MainInner({ address }: { address: EthAddressString }) {
 
   const { data: hasPendingRequest } = useReadContract({
     ...richRektContractData,
+    chainId: base.id,
     functionName: 'hasPendingRequest',
     args: [address as EthAddressString],
   })
@@ -31,6 +33,7 @@ function MainInner({ address }: { address: EthAddressString }) {
       setLoading(true)
       if (!hasPendingRequest) {
         await writeContract(config, {
+          chainId: base.id,
           ...richRektContractData,
           functionName: 'requestPlay',
           args: [address as EthAddressString],
