@@ -1,13 +1,19 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import RouteCard from './RouteCard'
 import House from 'assets/icons/House'
+import Referral from 'assets/icons/Referral'
 import Trophy from 'assets/icons/Trophy'
+import RouteCard from './RouteCard'
 
 const routes = [
   {
     href: '/',
     text: 'Main',
     icon: <House />,
+  },
+  {
+    href: '/refs',
+    text: 'Referrals',
+    icon: <Referral />,
   },
   {
     href: '/leaderboard',
