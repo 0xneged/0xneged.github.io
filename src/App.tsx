@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify'
 export default function App() {
   useEffect(() => {
     void sdk.actions.ready()
+    void sdk.actions.addMiniApp()
   }, [])
 
   return (

@@ -1,6 +1,7 @@
 import env from 'helpers/env'
 import axios from 'redaxios'
 import { EthAddressString } from 'types/Blockchain'
+import User from 'types/User'
 
 const backend = axios.create({ baseURL: env.VITE_BACKEND_URL })
 
@@ -8,12 +9,8 @@ export function settleGame(body: { address: string; signature: string }) {
   return backend.post<{ reward: number }>('/game/settle', body)
 }
 
-type LeaderboardUser = {
+type LeaderboardUser = User & {
   position?: number // only for current user, others are sorted
-  balance: number
-  fcUsername: string | undefined
-  fcPfpLink: string | undefined
-  address: string
 }
 
 export function getLeaderboard(params: {
@@ -23,4 +20,8 @@ export function getLeaderboard(params: {
     '/game/leaderboard',
     { params }
   )
+}
+
+export function getRefs(params: { address: EthAddressString }) {
+  return backend.get<{ refUsers: User[] }>('/game/refs', { params })
 }

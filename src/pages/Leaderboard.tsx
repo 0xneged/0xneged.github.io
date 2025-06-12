@@ -26,7 +26,7 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
     <ul className="relative flex h-full w-full flex-col overflow-y-auto">
       <li className="bg-accent-pale text-alt flex items-center justify-between p-2 font-serif">
         <span>You</span>
-        <span>{lb.user?.balance} pts</span>
+        <span>{lb.user?.balance} $RR</span>
         <span>#{Number(lb.user?.position) + 1}</span>
       </li>
       <div className="overflow-y-scroll text-lg text-white">
@@ -51,7 +51,7 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
               >
                 {user.fcUsername || user.address}
               </a>
-              <span>{roundNumber(user.balance)} pts</span>
+              <span>{roundNumber(user.balance)} $RR</span>
             </span>
           </li>
         ))}
