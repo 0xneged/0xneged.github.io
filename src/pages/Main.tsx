@@ -9,6 +9,7 @@ import useAnimatedLongPress from 'helpers/hooks/useAnimatedLongPress'
 import { usePlayer } from 'helpers/hooks/useContract'
 import { config } from 'helpers/wagmiConnector'
 import { useCallback, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount, useReadContract } from 'wagmi'
@@ -26,17 +27,25 @@ function MainInner({ address }: { address: EthAddressString }) {
     args: [address as EthAddressString],
   })
 
+  const [searchParams] = useSearchParams()
+
   const handleGame = useCallback(async () => {
     if (!canPlay) return
     try {
       setLoading(true)
       await switchChain(config, { chainId: base.id })
       if (!hasPendingRequest) {
+        const ref = searchParams.get('ref')
+        const contractArgs: readonly [EthAddressString] =
+          ref && ref.startsWith('0x') && ref.length === 42
+            ? [ref as EthAddressString]
+            : ['0x0000000000000000000000000000000000000000' as EthAddressString]
+
         await writeContract(config, {
-          chainId: base.id,
           ...richRektContractData,
+          chainId: base.id,
           functionName: 'requestPlay',
-          args: [address as EthAddressString],
+          args: contractArgs,
         })
       }
       const signature = await signMessage(config, {
@@ -55,7 +64,7 @@ function MainInner({ address }: { address: EthAddressString }) {
     } finally {
       setLoading(false)
     }
-  }, [address, canPlay, hasPendingRequest])
+  }, [address, canPlay, hasPendingRequest, searchParams])
 
   const { longPressHandler, pressProgress } = useAnimatedLongPress({
     callback: handleGame,
