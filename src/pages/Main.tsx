@@ -1,4 +1,4 @@
-import { signMessage, writeContract } from '@wagmi/core'
+import { signMessage, switchChain, writeContract } from '@wagmi/core'
 import ConnectButton from 'components/ConnectButton'
 import RoundButton from 'components/RoundButton'
 import { settleGame } from 'helpers/api/backend'
@@ -32,6 +32,7 @@ function MainInner({ address }: { address: EthAddressString }) {
   const handleGame = useCallback(async () => {
     try {
       setLoading(true)
+      await switchChain(config, { chainId: base.id })
       if (!hasPendingRequest) {
         await writeContract(config, {
           chainId: base.id,
