@@ -1,18 +1,14 @@
-import share from 'helpers/share'
-import { useCallback } from 'react'
+import { getShareFarcaster } from 'helpers/getUserLink'
 
 export default function ({ address }: { address: string }) {
-  const shareRef = useCallback(async () => {
-    const url = document.location.origin + '?ref=' + address
-    await share(url)
-  }, [address])
-
   return (
-    <button
-      onClick={shareRef}
+    <a
+      href={getShareFarcaster(address)}
+      target="_blank"
+      rel="noopener noreferrer"
       className="bg-accent-bright hover:bg-accent cursor-pointer rounded-full px-4 py-2 transition-colors"
     >
       Share ref
-    </button>
+    </a>
   )
 }
