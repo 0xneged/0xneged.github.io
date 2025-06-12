@@ -1,4 +1,5 @@
 import { signMessage, writeContract } from '@wagmi/core'
+import ConnectButton from 'components/ConnectButton'
 import RoundButton from 'components/RoundButton'
 import { settleGame } from 'helpers/api/backend'
 import { richRektContractData } from 'helpers/api/contract'
@@ -9,7 +10,7 @@ import { config } from 'helpers/wagmiConnector'
 import { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
 import { EthAddressString } from 'types/Blockchain'
-import { useAccount, useConnect, useReadContract } from 'wagmi'
+import { useAccount, useReadContract } from 'wagmi'
 import { base } from 'wagmi/chains'
 
 const oneDay = 1000 * 60 * 60 * 24
@@ -45,7 +46,7 @@ function MainInner({ address }: { address: EthAddressString }) {
       })
 
       const {
-        data: { newPoints, reward },
+        data: { reward },
       } = await settleGame({ address, signature })
       // TODO: invalidate queries or save proper states
       toast.success(`Nice, your reward is ${reward}`)
@@ -88,7 +89,6 @@ function MainInner({ address }: { address: EthAddressString }) {
 
 export default function MainPage() {
   const { isConnected, address } = useAccount()
-  const { connect, connectors } = useConnect()
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-between overflow-y-auto py-4">
@@ -106,9 +106,7 @@ export default function MainPage() {
       {isConnected && address ? (
         <MainInner address={address} />
       ) : (
-        <RoundButton onClick={() => connect({ connector: connectors[0] })}>
-          Connect
-        </RoundButton>
+        <ConnectButton />
       )}
       <h2 className="text-alt text-center font-serif text-2xl">
         <p>Feelin' lucky</p>

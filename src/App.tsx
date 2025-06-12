@@ -1,6 +1,6 @@
 import { sdk } from '@farcaster/frame-sdk'
 import AnimatedRoutes from 'components/AnimatedRoutes'
-import Navigator from 'components/Navigator.tsx'
+import LiquidMenu from 'components/LiquidMenu'
 import Overlay from 'components/Overlay'
 import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
@@ -15,7 +15,7 @@ export default function App() {
       <Overlay />
 
       <AnimatedRoutes />
-      <Navigator />
+      <LiquidMenu />
 
       <ToastContainer
         draggable
