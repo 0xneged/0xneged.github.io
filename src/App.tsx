@@ -1,7 +1,6 @@
 import { sdk } from '@farcaster/frame-sdk'
 import AnimatedRoutes from 'components/AnimatedRoutes'
 import LiquidMenu from 'components/LiquidMenu'
-import Overlay from 'components/Overlay'
 import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 
@@ -13,8 +12,6 @@ export default function App() {
 
   return (
     <div className="relative mx-auto flex h-dvh w-dvw max-w-prose flex-col overflow-hidden">
-      <Overlay />
-
       <AnimatedRoutes />
       <LiquidMenu />
 
