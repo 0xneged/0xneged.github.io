@@ -2,13 +2,27 @@
   "frame": {
     "version": "1",
     "name": "Rich or Rekt",
-    "iconUrl": "https://0xneged.github.io/rich-rekt/favicon/web-app-manifest-512x512.png",
-    "homeUrl": "https://0xneged.github.io/rich-rekt",
-    "imageUrl": "https://0xneged.github.io/rich-rekt/og.png",
-    "buttonTitle": "Get rich bitch",
-    "splashImageUrl": "https://0xneged.github.io/rich-rekt/favicon/web-app-manifest-512x512.png",
-    "splashBackgroundColor": "#2c257f",
+    "iconUrl": "https://0xneged.github.io/favicon/web-app-manifest-512x512.png",
+    "homeUrl": "https://0xneged.github.io",
+    "imageUrl": "https://0xneged.github.io/og.png",
+    "buttonTitle": "Get rich or get rekt 😎",
+    "splashImageUrl": "https://0xneged.github.io/favicon/web-app-manifest-512x512.png",
+    "splashBackgroundColor": "#0f0d26",
     "requiredChains": ["eip155:8453"],
-    "requiredCapabilities": ["actions.signIn", "wallet.getEthereumProvider"]
+    "requiredCapabilities": ["actions.signIn", "wallet.getEthereumProvider"],
+    "subtitle": "Top Warpcast creators",
+    "description": "Try your luck and see if you can get rich",
+    "screenshotUrls": [
+      "https://0xneged.github.io/screenshots/1.png",
+      "https://0xneged.github.io/screenshots/2.png",
+      "https://0xneged.github.io/screenshots/3.png"
+    ],
+    "primaryCategory": "social",
+    "tags": ["rich", "leaderboard", "warpcast", "earn"],
+    "heroImageUrl": "https://0xneged.github.io/og.jpg",
+    "tagline": "Where's your moneybag?",
+    "ogTitle": "Rich or Rekt",
+    "ogDescription": "Gonna be rich or gonna get rekt",
+    "ogImageUrl": "https://0xneged.github.io/og.jpg"
   }
 }

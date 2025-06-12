@@ -16,7 +16,7 @@ export default defineConfig({
     svgr(),
     isDev && componentTagger(),
   ],
-  base: '/rich-rekt/',
+  // base: '/rich-rekt/',
   server: {
     allowedHosts: ['.trycloudflare.com'],
   },
