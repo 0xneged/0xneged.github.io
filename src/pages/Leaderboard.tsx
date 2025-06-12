@@ -24,10 +24,12 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
 
   return (
     <ul className="relative flex h-full w-full flex-col overflow-y-auto">
-      <li className="bg-accent-pale text-alt flex items-center justify-between p-2 font-serif">
-        <span>You</span>
-        <span>{lb.user?.balance} $RR</span>
-        <span>#{Number(lb.user?.position) + 1}</span>
+      <li className="bg-accent-pale text-alt flex items-center justify-between gap-2 p-2 font-serif">
+        <span className="font-serif font-bold">Leaderboard</span>
+        <span className="inline-flex gap-x-8">
+          <span>Balance: {lb.user?.balance} $RR</span>
+          <span>Position: #{Number(lb.user?.position) + 1}</span>
+        </span>
       </li>
       <div className="overflow-y-scroll text-lg text-white">
         {lb.top.map((user, index) => (
