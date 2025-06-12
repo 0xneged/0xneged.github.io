@@ -24,8 +24,8 @@ const routes = [
 
 export default function LiquidMenu() {
   return (
-    <nav className="w-full">
-      <div className="wrapper">
+    <nav className="fixed bottom-0 w-full max-w-prose">
+      <div className="wrapper m-4">
         <div className="liquidGlass-wrapper dock">
           <div className="liquidGlass-effect"></div>
           <div className="liquidGlass-tint"></div>

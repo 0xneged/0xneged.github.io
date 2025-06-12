@@ -13,6 +13,7 @@
     0 0 20px rgba(0, 0, 0, 0.1);
 
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  border-radius: 9999px;
 }
 
 .liquidGlass-effect {
@@ -24,13 +25,15 @@
   filter: url(#glass-distortion);
   overflow: hidden;
   isolation: isolate;
+  border-radius: 9999px;
 }
 
 .liquidGlass-tint {
   z-index: 1;
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.25);
+  background: #4036aa10;
+  border-radius: 9999px;
 }
 
 .liquidGlass-shine {
@@ -41,8 +44,10 @@
   overflow: hidden;
 
   box-shadow:
-    inset 2px 2px 1px 0 rgba(255, 255, 255, 0.5),
-    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.5);
+    inset 2px 2px 1px 0 #4036aa50,
+    inset -1px -1px 1px 1px #4036aa50;
+
+  border-radius: 9999px;
 }
 
 .liquidGlass-text {
@@ -58,6 +63,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+  border-radius: 9999px;
 }
 
 .dock {
@@ -66,10 +72,11 @@
   justify-content: center;
   width: 100%;
   gap: 8px;
+  border-radius: 9999px;
 }
 
 .dock:hover {
-  padding: 0.075rem;
+  padding: 0.2rem;
 }
 
 .dock img {

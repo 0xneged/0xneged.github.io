@@ -17,7 +17,6 @@ export default function RouteCard({
       to={href}
       className={({ isActive }) =>
         cn(
-          isActive ? 'flex-3' : 'flex-1',
           isActive ? 'text-alt' : 'text-accent',
           'flex h-20 w-full items-center justify-center gap-1 rounded-t-md p-2 transition-all hover:text-white'
         )

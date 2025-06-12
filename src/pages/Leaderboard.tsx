@@ -55,6 +55,7 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
             </span>
           </li>
         ))}
+        <li className="h-28 w-full" />
       </div>
     </ul>
   )

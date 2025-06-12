@@ -91,7 +91,7 @@ export default function MainPage() {
   const { isConnected, address } = useAccount()
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-between overflow-y-auto py-4">
+    <div className="mb-32 flex h-full w-full flex-col items-center justify-between overflow-y-auto py-4">
       <h1
         className="text-accent text-center font-serif text-5xl"
         style={{
