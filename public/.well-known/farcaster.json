@@ -1,4 +1,9 @@
 {
+  "accountAssociation": {
+    "header": "eyJmaWQiOjk1ODcsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHg2YjVhZDBiOWE0NDdkMzNFNzhCMjUwMTdCNzU0MGEwRDI3MjNkYzRBIn0",
+    "payload": "eyJkb21haW4iOiIweG5lZ2VkLmdpdGh1Yi5pbyJ9",
+    "signature": "MHhkZWQ5YmYwMThhZTRiNGM1OGE1YTU2NDU4MzNiNWE0MTg4YTNjZmRhN2RlYWVlNGI2OGVkNmNlZjg3MzNmOTk1M2ZjNjdhZDJlNTViMWJiODI5MTgwZGVjODVjMzNiYTY2ZmNmMmIxYjRmNGE3ZmNkYzI3YWVkYzZmMGU2MmVhMTFj"
+  },
   "frame": {
     "version": "1",
     "name": "Rich or Rekt",
