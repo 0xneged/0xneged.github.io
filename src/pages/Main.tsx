@@ -99,6 +99,7 @@ function MainInner({ address }: { address: EthAddressString }) {
         </h2>
       </>
     )
+  console.log(timeout)
 
   return (
     <h2 className="text-alt text-center font-serif text-2xl font-semibold">

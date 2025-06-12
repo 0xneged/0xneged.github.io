@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import ConnectButton from 'components/ConnectButton'
+import DotsLoader from 'components/DotsLoad'
 import { getLeaderboard } from 'helpers/api/backend'
 import { cn } from 'helpers/cn'
 import getUserLink from 'helpers/getUserLink'
@@ -16,7 +17,8 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
   if (status !== 'success')
     return (
       <p className="text-accent-bright font-serif text-3xl">
-        Loading leaderboard...
+        Loading leaderboard
+        <DotsLoader />
       </p>
     )
 

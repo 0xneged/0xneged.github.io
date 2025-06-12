@@ -15,8 +15,8 @@ function ReferralsInner({ address }: { address: EthAddressString }) {
 
   if (status !== 'success')
     return (
-      <p>
-        Loading
+      <p className="text-accent-bright font-serif text-3xl">
+        Loading referrals
         <DotsLoader />
       </p>
     )
