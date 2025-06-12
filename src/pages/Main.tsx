@@ -1,6 +1,7 @@
 import { signMessage, switchChain, writeContract } from '@wagmi/core'
 import ConnectButton from 'components/ConnectButton'
 import RoundButton from 'components/RoundButton'
+import Timer from 'components/Timer'
 import { settleGame } from 'helpers/api/backend'
 import { richRektContractData } from 'helpers/api/contract'
 import handleError from 'helpers/handleError'
@@ -13,14 +14,10 @@ import { EthAddressString } from 'types/Blockchain'
 import { useAccount, useReadContract } from 'wagmi'
 import { base } from 'wagmi/chains'
 
-const oneDay = 1000 * 60 * 60 * 24
-
 function MainInner({ address }: { address: EthAddressString }) {
   const [loading, setLoading] = useState(false)
-
-  const { lastPlayed } = usePlayer(address)
-
-  const canPlay = lastPlayed ? Number(lastPlayed) > Date.now() - oneDay : true
+  const { timeout } = usePlayer(address)
+  const canPlay = timeout < 0
 
   const { data: hasPendingRequest } = useReadContract({
     ...richRektContractData,
@@ -30,6 +27,7 @@ function MainInner({ address }: { address: EthAddressString }) {
   })
 
   const handleGame = useCallback(async () => {
+    if (!canPlay) return
     try {
       setLoading(true)
       await switchChain(config, { chainId: base.id })
@@ -49,6 +47,7 @@ function MainInner({ address }: { address: EthAddressString }) {
       const {
         data: { reward },
       } = await settleGame({ address, signature })
+
       // TODO: invalidate queries or save proper states
       toast.success(`Nice, your reward is ${reward}`)
     } catch (e) {
@@ -56,35 +55,46 @@ function MainInner({ address }: { address: EthAddressString }) {
     } finally {
       setLoading(false)
     }
-  }, [address, hasPendingRequest])
+  }, [address, canPlay, hasPendingRequest])
 
   const { longPressHandler, pressProgress } = useAnimatedLongPress({
     callback: handleGame,
     disabled: loading || !canPlay,
   })
 
+  if (canPlay)
+    return (
+      <>
+        <RoundButton
+          {...longPressHandler()}
+          onContextMenu={(e) => e.preventDefault()}
+          style={{
+            filter: `drop-shadow(0 ${0.75 * (1 - pressProgress)}rem 0 #1b1758)`,
+            transform: `translateY(${pressProgress * 0.75}rem) rotateX(25deg)`,
+          }}
+        >
+          {loading ? (
+            <p>Playing...</p>
+          ) : hasPendingRequest ? (
+            <p>Hold again</p>
+          ) : (
+            <>
+              <p>HOLD</p>
+              <p>ME</p>
+            </>
+          )}
+        </RoundButton>
+        <h2 className="text-alt text-center font-serif text-2xl">
+          <p>Feelin' lucky</p>
+          <p>today?</p>
+        </h2>
+      </>
+    )
+
   return (
-    <RoundButton
-      {...longPressHandler()}
-      onContextMenu={(e) => e.preventDefault()}
-      style={{
-        filter: `drop-shadow(0 ${0.75 * (1 - pressProgress)}rem 0 #1b1758)`,
-        transform: `translateY(${pressProgress * 0.75}rem) rotateX(25deg)`,
-      }}
-    >
-      {loading ? (
-        <p>Playing...</p>
-      ) : hasPendingRequest ? (
-        <p>Hold again</p>
-      ) : canPlay ? (
-        <>
-          <p>HOLD</p>
-          <p>ME</p>
-        </>
-      ) : (
-        <p>Play again in 24h</p>
-      )}
-    </RoundButton>
+    <h2 className="text-alt text-center font-serif text-2xl font-semibold">
+      Play again in <Timer diffTime={timeout} />
+    </h2>
   )
 }
 
@@ -109,10 +119,6 @@ export default function MainPage() {
       ) : (
         <ConnectButton />
       )}
-      <h2 className="text-alt text-center font-serif text-2xl">
-        <p>Feelin' lucky</p>
-        <p>today?</p>
-      </h2>
     </div>
   )
 }
