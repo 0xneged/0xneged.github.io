@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import ConnectButton from 'components/ConnectButton'
+import DotsLoader from 'components/DotsLoad'
 import ShareRefButton from 'components/ShareRefButton'
 import { getRefs } from 'helpers/api/backend'
 import getUserLink from 'helpers/getUserLink'
@@ -12,7 +13,13 @@ function ReferralsInner({ address }: { address: EthAddressString }) {
     queryFn: () => getRefs({ address }),
   })
 
-  if (status !== 'success') return <p>Loading...</p>
+  if (status !== 'success')
+    return (
+      <p>
+        Loading
+        <DotsLoader />
+      </p>
+    )
 
   const refUsers = data.data.refUsers
 

@@ -155,3 +155,16 @@ div[data-rmiz-modal-overlay='visible'] {
   animation: dots 1s linear infinite;
   content: '.';
 }
+
+@keyframes dots {
+  0%,
+  30% {
+    content: '.';
+  }
+  60% {
+    content: '..';
+  }
+  90% {
+    content: '...';
+  }
+}
