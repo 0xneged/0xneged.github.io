@@ -1,5 +1,6 @@
 import { signMessage, switchChain, writeContract } from '@wagmi/core'
 import ConnectButton from 'components/ConnectButton'
+import DotsLoader from 'components/DotsLoad'
 import FeelingLuckyBlock from 'components/Navigator.tsx/FeelingLuckyBlock'
 import RoundButton from 'components/RoundButton'
 import Timer from 'components/Timer'
@@ -23,10 +24,8 @@ function MainInner({
   address: EthAddressString
   refAddress: string | null
 }) {
-  const [loading, setLoading] = useState(false)
-  const { timeout, refetchPlayer, loadingPlayer } = usePlayer(address)
-  const canPlay = !loadingPlayer && timeout < 0
-
+  const [playing, setPlaying] = useState(false)
+  const { endTime, refetchPlayer, loading, canPlay } = usePlayer(address)
   const { data: hasPendingRequest } = useReadContract({
     ...richRektContractData,
     chainId: base.id,
@@ -36,7 +35,7 @@ function MainInner({
 
   const handleGame = useCallback(async () => {
     try {
-      setLoading(true)
+      setPlaying(true)
       await switchChain(config, { chainId: base.id })
       if (!hasPendingRequest) {
         await writeContract(config, {
@@ -56,19 +55,22 @@ function MainInner({
       } = await settleGame({ address, signature })
 
       await refetchPlayer()
-      setTimeout(() => void invalidateQuery(queryKeys.leaderboard(address)))
+      setTimeout(() => invalidateQuery(queryKeys.leaderboard(address)))
+
       toast.success(`Nice, your reward is ${reward}`)
     } catch (e) {
       handleError({ e, toastMessage: 'Failed to play :(' })
     } finally {
-      setLoading(false)
+      setPlaying(false)
     }
   }, [address, hasPendingRequest, refAddress, refetchPlayer])
 
   const { longPressHandler, pressProgress } = useAnimatedLongPress({
     callback: handleGame,
-    disabled: loading || !canPlay,
+    disabled: loading,
   })
+
+  if (loading) return <DotsLoader />
 
   if (canPlay)
     return (
@@ -81,7 +83,7 @@ function MainInner({
             transform: `translateY(${pressProgress * 0.75}rem) rotateX(25deg)`,
           }}
         >
-          {loading ? (
+          {playing ? (
             <p>Playing...</p>
           ) : hasPendingRequest ? (
             <p>Hold again</p>
@@ -109,7 +111,7 @@ function MainInner({
       </RoundButton>
 
       <h2 className="text-alt text-center font-serif text-2xl font-semibold">
-        Play again in <Timer diffTime={timeout} />
+        Play again in {endTime ? <Timer endTime={endTime} /> : <DotsLoader />}
       </h2>
     </>
   )
@@ -133,6 +135,7 @@ export default function MainPage() {
         <p className="text-2xl">OR</p>
         <p>REKT</p>
       </h1>
+
       {isConnected && address ? (
         <MainInner address={address} refAddress={refAddress} />
       ) : (

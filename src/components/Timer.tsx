@@ -1,27 +1,22 @@
-import useCountDown from 'helpers/hooks/userCountDown'
-import { formatDuration } from 'helpers/time/time'
+import { useCountDownEndTime } from 'helpers/hooks/userCountDown'
 import { ClassNameProp } from 'types/Props'
-import DotsLoader from './DotsLoad'
 
 export default function ({
-  diffTime,
-  step,
+  endTime,
   format = 'HH:mm:ss',
   className,
 }: {
-  diffTime: number
+  endTime: number
   step?: number
   format?: string
 } & ClassNameProp) {
-  const { time } = useCountDown(diffTime, step)
+  const { formatted } = useCountDownEndTime({ endTime, format })
 
   return (
     <div
       className={`font-accent rounded-3xl px-3 py-2 text-sm font-semibold opacity-50 ${className}`}
     >
-      <span className="flex flex-col items-center">
-        {diffTime ? formatDuration(time, format) : <DotsLoader />}
-      </span>
+      <span className="flex flex-col items-center">{formatted}</span>
     </div>
   )
 }

@@ -1,10 +1,12 @@
 import { richRektContractData } from 'helpers/api/contract'
 import calculateTimeout from 'helpers/time/calculateTimeout'
+import { useEffect, useState } from 'react'
 import type { EthAddressString } from 'types/Blockchain'
 import { useReadContract } from 'wagmi'
 import { base } from 'wagmi/chains'
 
 export function usePlayer(address: string) {
+  const [loading, setLoading] = useState(true)
   const {
     data: player,
     refetch,
@@ -16,11 +18,18 @@ export function usePlayer(address: string) {
     args: [address as EthAddressString],
   })
 
-  const lastPlayed = Number(player?.[0]) * 1000
+  useEffect(() => {
+    setLoading(status !== 'success')
+  }, [status])
+
+  const lastPlayed = player ? Number(player[0]) * 1000 : 0
 
   return {
-    loadingPlayer: status !== 'success',
-    timeout: calculateTimeout(lastPlayed),
+    loading,
+    setLoading,
+
+    endTime: loading ? null : calculateTimeout(lastPlayed),
+    canPlay: loading ? false : calculateTimeout(lastPlayed) < Date.now(),
     lastPlayed,
     points: player?.[1],
     referrer: player?.[2],
