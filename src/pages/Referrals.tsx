@@ -40,7 +40,7 @@ export default function Referrals() {
   const { address } = useAccount()
 
   return (
-    <div className="mx-4 flex h-full w-full flex-col items-center justify-center gap-y-2 overflow-y-auto">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-y-2 overflow-y-auto">
       {address ? <ReferralsInner address={address} /> : <ConnectButton />}
     </div>
   )
