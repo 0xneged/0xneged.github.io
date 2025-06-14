@@ -11,13 +11,18 @@ import { usePlayer } from 'helpers/hooks/useContract'
 import { invalidateQuery, queryKeys } from 'helpers/queryClient'
 import { config } from 'helpers/wagmiConnector'
 import { useCallback, useState } from 'react'
-import { useSearchParams } from 'react-router'
 import { toast } from 'react-toastify'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount, useReadContract } from 'wagmi'
 import { base } from 'wagmi/chains'
 
-function MainInner({ address }: { address: EthAddressString }) {
+function MainInner({
+  address,
+  refAddress = '0x0000000000000000000000000000000000000000',
+}: {
+  address: EthAddressString
+  refAddress: string | null
+}) {
   const [loading, setLoading] = useState(false)
   const { timeout, refetchPlayer, loadingPlayer } = usePlayer(address)
   const canPlay = !loadingPlayer && timeout < 0
@@ -26,27 +31,19 @@ function MainInner({ address }: { address: EthAddressString }) {
     ...richRektContractData,
     chainId: base.id,
     functionName: 'hasPendingRequest',
-    args: [address as EthAddressString],
+    args: [address],
   })
-
-  const [searchParams] = useSearchParams()
 
   const handleGame = useCallback(async () => {
     try {
       setLoading(true)
       await switchChain(config, { chainId: base.id })
       if (!hasPendingRequest) {
-        const ref = searchParams.get('ref')
-        const contractArgs: readonly [EthAddressString] =
-          ref && ref.startsWith('0x') && ref.length === 42
-            ? [ref as EthAddressString]
-            : ['0x0000000000000000000000000000000000000000' as EthAddressString]
-
         await writeContract(config, {
           ...richRektContractData,
           chainId: base.id,
           functionName: 'requestPlay',
-          args: contractArgs,
+          args: [refAddress as EthAddressString],
         })
       }
       const signature = await signMessage(config, {
@@ -66,7 +63,7 @@ function MainInner({ address }: { address: EthAddressString }) {
     } finally {
       setLoading(false)
     }
-  }, [address, hasPendingRequest, refetchPlayer, searchParams])
+  }, [address, hasPendingRequest, refAddress, refetchPlayer])
 
   const { longPressHandler, pressProgress } = useAnimatedLongPress({
     callback: handleGame,
@@ -120,6 +117,8 @@ function MainInner({ address }: { address: EthAddressString }) {
 
 export default function MainPage() {
   const { isConnected, address } = useAccount()
+  const params = new URLSearchParams(window.location.search)
+  const refAddress = params.get('ref')
 
   return (
     <div className="mb-32 flex h-full w-full flex-col items-center justify-between overflow-y-auto py-4">
@@ -135,7 +134,7 @@ export default function MainPage() {
         <p>REKT</p>
       </h1>
       {isConnected && address ? (
-        <MainInner address={address} />
+        <MainInner address={address} refAddress={refAddress} />
       ) : (
         <>
           <ConnectButton />

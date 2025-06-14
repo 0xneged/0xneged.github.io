@@ -16,6 +16,6 @@ export default function fcLinkOpen({
 export function sharePost(address: string) {
   void composeCast({
     text: 'get Rich or get Rekt',
-    embeds: [`https://0xneged.github.io?ref=${address}`],
+    embeds: [`https://0xneged.github.io/${address}`],
   })
 }

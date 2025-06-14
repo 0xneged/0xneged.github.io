@@ -3,7 +3,7 @@ import ConnectButton from 'components/ConnectButton'
 import DotsLoader from 'components/DotsLoad'
 import ShareRefButton from 'components/ShareRefButton'
 import { getRefs } from 'helpers/api/backend'
-import getUserLink from 'helpers/fcLinkOpen'
+import fcLinkOpen from 'helpers/fcLinkOpen'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount } from 'wagmi'
 
@@ -30,12 +30,9 @@ function ReferralsInner({ address }: { address: EthAddressString }) {
           {refUsers.map((user) => (
             <li key={user.address}>
               <a
-                href={getUserLink({
-                  address: user.address,
-                  fcUsername: user.fcUsername,
-                })}
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={() =>
+                  void fcLinkOpen({ address: user.address, fid: user.fid })
+                }
                 className="truncate"
               >
                 {user.fcUsername || user.address}

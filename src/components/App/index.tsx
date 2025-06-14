@@ -1,6 +1,5 @@
 import { sdk } from '@farcaster/frame-sdk'
 import MiniApp from 'components/App/MiniApp'
-import WebPromo from 'components/App/WebPromo'
 import DotsLoader from 'components/DotsLoad'
 import { useEffect, useState } from 'react'
 
@@ -29,7 +28,7 @@ export default function App() {
       ) : isMiniApp ? (
         <MiniApp />
       ) : (
-        <WebPromo />
+        <MiniApp />
       )}
     </div>
   )
