@@ -1,7 +1,7 @@
 import { signMessage, switchChain, writeContract } from '@wagmi/core'
 import ConnectButton from 'components/ConnectButton'
 import DotsLoader from 'components/DotsLoad'
-import FeelingLuckyBlock from 'components/Navigator.tsx/FeelingLuckyBlock'
+import FeelingLuckyBlock from 'components/FeelingLuckyBlock'
 import RoundButton from 'components/RoundButton'
 import Timer from 'components/Timer'
 import { settleGame } from 'helpers/api/backend'

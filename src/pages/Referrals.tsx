@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import ConnectButton from 'components/ConnectButton'
 import DotsLoader from 'components/DotsLoad'
 import ShareRefButton from 'components/ShareRefButton'
+import UserList from 'components/UserList'
 import { getRefs } from 'helpers/api/backend'
-import fcLinkOpen from 'helpers/fcLinkOpen'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount } from 'wagmi'
 
@@ -24,22 +24,9 @@ function ReferralsInner({ address }: { address: EthAddressString }) {
   const refUsers = data.data.refUsers
 
   return (
-    <div className="flex flex-col gap-y-2">
+    <div className="flex w-full flex-col gap-y-2">
       {refUsers.length ? (
-        <ul className="flex flex-col overflow-y-scroll">
-          {refUsers.map((user) => (
-            <li key={user.address}>
-              <a
-                onClick={() =>
-                  void fcLinkOpen({ address: user.address, fid: user.fid })
-                }
-                className="truncate"
-              >
-                {user.fcUsername || user.address}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <UserList list={refUsers.sort((a, b) => b.balance - a.balance)} />
       ) : (
         <p className="text-center font-serif">No refs yet!</p>
       )}

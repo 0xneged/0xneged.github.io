@@ -3,7 +3,7 @@ import Referral from 'assets/icons/Referral'
 import Trophy from 'assets/icons/Trophy'
 import { useAccount } from 'wagmi'
 import './LiquidMenu.css'
-import RouteCard from './Navigator.tsx/RouteCard'
+import RouteCard from './RouteCard'
 
 const routes = [
   {

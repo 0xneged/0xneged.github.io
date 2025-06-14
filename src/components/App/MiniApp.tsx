@@ -1,12 +1,12 @@
-import AnimatedRoutes from 'components/AnimatedRoutes'
-import LiquidMenu from 'components/LiquidMenu'
+import Navigator from 'components/Navigator/Navigator'
+import Routes from 'components/Navigator/Routes'
 import { ToastContainer } from 'react-toastify'
 
 export default function MiniApp() {
   return (
     <>
-      <AnimatedRoutes />
-      <LiquidMenu />
+      <Routes />
+      <Navigator />
       <ToastContainer
         draggable
         position="top-center"

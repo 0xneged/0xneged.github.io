@@ -1,11 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import ConnectButton from 'components/ConnectButton'
 import DotsLoader from 'components/DotsLoad'
+import UserList from 'components/UserList'
 import { getLeaderboard } from 'helpers/api/backend'
-import { cn } from 'helpers/cn'
-import fcLinkOpen from 'helpers/fcLinkOpen'
 import { queryKeys } from 'helpers/queryClient'
-import roundNumber from 'helpers/roundNumber'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount } from 'wagmi'
 
@@ -34,33 +32,12 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
           <span>Position: #{Number(lb.user?.position) + 1}</span>
         </span>
       </li>
-      <div className="overflow-y-scroll text-lg text-white">
-        {lb.top.map((user, index) => (
-          <li
-            key={user.address + index}
-            className={cn(
-              'px-4',
-              index === lb.user?.position ? 'bg-accent-pale text-alt' : ''
-            )}
-          >
-            <span className="inline-flex w-full items-center justify-between gap-2">
-              <span>#{index + 1}</span>
-              <a
-                onClick={() =>
-                  void fcLinkOpen({ address: user.address, fid: user.fid })
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                className="max-w-40 truncate"
-              >
-                {user.fcUsername || user.address}
-              </a>
-              <span>{roundNumber(user.balance)} $RR</span>
-            </span>
-          </li>
-        ))}
-        <li className="h-28 w-full" />
-      </div>
+      <UserList
+        list={lb.top}
+        currentClassName={(index) =>
+          index === lb.user?.position ? 'bg-accent-pale text-alt' : ''
+        }
+      />
     </ul>
   )
 }

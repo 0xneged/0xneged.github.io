@@ -6,7 +6,7 @@ import Referrals from 'pages/Referrals'
 import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router'
 import { useAccount } from 'wagmi'
-import ProtectedRoute from './Navigator.tsx/ProtectedRoute'
+import ProtectedRoute from './ProtectedRoute'
 
 export default function AnimatedRoutes() {
   const { isConnected, status } = useAccount()

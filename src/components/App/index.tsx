@@ -2,6 +2,7 @@ import { sdk } from '@farcaster/frame-sdk'
 import MiniApp from 'components/App/MiniApp'
 import DotsLoader from 'components/DotsLoad'
 import { useEffect, useState } from 'react'
+import WebPromo from './WebPromo'
 
 export default function App() {
   const [loading, setLoading] = useState(true)
@@ -28,7 +29,7 @@ export default function App() {
       ) : isMiniApp ? (
         <MiniApp />
       ) : (
-        <MiniApp />
+        <WebPromo />
       )}
     </div>
   )
