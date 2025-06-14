@@ -19,8 +19,8 @@ import { base } from 'wagmi/chains'
 
 function MainInner({ address }: { address: EthAddressString }) {
   const [loading, setLoading] = useState(false)
-  const { timeout, refetchPlayer } = usePlayer(address)
-  const canPlay = timeout < 0
+  const { timeout, refetchPlayer, loadingPlayer } = usePlayer(address)
+  const canPlay = !loadingPlayer && timeout < 0
 
   const { data: hasPendingRequest } = useReadContract({
     ...richRektContractData,
@@ -32,7 +32,6 @@ function MainInner({ address }: { address: EthAddressString }) {
   const [searchParams] = useSearchParams()
 
   const handleGame = useCallback(async () => {
-    if (!canPlay) return
     try {
       setLoading(true)
       await switchChain(config, { chainId: base.id })
@@ -67,7 +66,7 @@ function MainInner({ address }: { address: EthAddressString }) {
     } finally {
       setLoading(false)
     }
-  }, [address, canPlay, hasPendingRequest, refetchPlayer, searchParams])
+  }, [address, hasPendingRequest, refetchPlayer, searchParams])
 
   const { longPressHandler, pressProgress } = useAnimatedLongPress({
     callback: handleGame,

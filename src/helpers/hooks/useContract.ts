@@ -5,7 +5,11 @@ import { useReadContract } from 'wagmi'
 import { base } from 'wagmi/chains'
 
 export function usePlayer(address: string) {
-  const { data: player, refetch } = useReadContract({
+  const {
+    data: player,
+    refetch,
+    status,
+  } = useReadContract({
     ...richRektContractData,
     chainId: base.id,
     functionName: 'getPlayer',
@@ -15,6 +19,7 @@ export function usePlayer(address: string) {
   const lastPlayed = Number(player?.[0]) * 1000
 
   return {
+    loadingPlayer: status !== 'success',
     timeout: calculateTimeout(lastPlayed),
     lastPlayed,
     points: player?.[1],

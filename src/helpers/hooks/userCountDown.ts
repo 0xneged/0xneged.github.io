@@ -1,7 +1,9 @@
 import dayjs from 'dayjs'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export default function (setTime: Dispatch<SetStateAction<number>>, step = 1) {
+export default function useCountDown(initialDiff = 0, step = 1) {
+  const [time, setTime] = useState(initialDiff)
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTime((prev) => (prev ? prev - step : 0))
@@ -11,6 +13,8 @@ export default function (setTime: Dispatch<SetStateAction<number>>, step = 1) {
       clearInterval(interval)
     }
   }, [setTime, step])
+
+  return { time, setTime }
 }
 
 export function useCountDownEndTime({
