@@ -3,7 +3,7 @@ import ConnectButton from 'components/ConnectButton'
 import DotsLoader from 'components/DotsLoad'
 import ShareRefButton from 'components/ShareRefButton'
 import { getRefs } from 'helpers/api/backend'
-import getUserLink from 'helpers/getUserLink'
+import getUserLink from 'helpers/fcLinkOpen'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount } from 'wagmi'
 

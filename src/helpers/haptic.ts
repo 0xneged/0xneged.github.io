@@ -1,3 +1,5 @@
-export default function hapticFeedback() {
-  navigator.vibrate?.([100])
+import sdk from '@farcaster/frame-sdk'
+
+export default async function hapticFeedback() {
+  await sdk.haptics.impactOccurred('light')
 }

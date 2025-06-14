@@ -8,6 +8,7 @@ import { richRektContractData } from 'helpers/api/contract'
 import handleError from 'helpers/handleError'
 import useAnimatedLongPress from 'helpers/hooks/useAnimatedLongPress'
 import { usePlayer } from 'helpers/hooks/useContract'
+import { invalidateQuery, queryKeys } from 'helpers/queryClient'
 import { config } from 'helpers/wagmiConnector'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router'
@@ -18,7 +19,7 @@ import { base } from 'wagmi/chains'
 
 function MainInner({ address }: { address: EthAddressString }) {
   const [loading, setLoading] = useState(false)
-  const { timeout } = usePlayer(address)
+  const { timeout, refetchPlayer } = usePlayer(address)
   const canPlay = timeout < 0
 
   const { data: hasPendingRequest } = useReadContract({
@@ -58,14 +59,15 @@ function MainInner({ address }: { address: EthAddressString }) {
         data: { reward },
       } = await settleGame({ address, signature })
 
-      // TODO: invalidate queries or save proper states
+      await refetchPlayer()
+      setTimeout(() => void invalidateQuery(queryKeys.leaderboard(address)))
       toast.success(`Nice, your reward is ${reward}`)
     } catch (e) {
       handleError({ e, toastMessage: 'Failed to play :(' })
     } finally {
       setLoading(false)
     }
-  }, [address, canPlay, hasPendingRequest, searchParams])
+  }, [address, canPlay, hasPendingRequest, refetchPlayer, searchParams])
 
   const { longPressHandler, pressProgress } = useAnimatedLongPress({
     callback: handleGame,

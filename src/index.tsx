@@ -1,7 +1,7 @@
 import 'index.css'
 
 import { QueryClientProvider } from '@tanstack/react-query'
-import App from 'App'
+import App from 'components/App'
 import queryClient from 'helpers/queryClient'
 import { config } from 'helpers/wagmiConnector'
 import { createRoot } from 'react-dom/client'

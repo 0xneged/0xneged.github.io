@@ -5,7 +5,7 @@ import { useReadContract } from 'wagmi'
 import { base } from 'wagmi/chains'
 
 export function usePlayer(address: string) {
-  const { data: player } = useReadContract({
+  const { data: player, refetch } = useReadContract({
     ...richRektContractData,
     chainId: base.id,
     functionName: 'getPlayer',
@@ -19,5 +19,6 @@ export function usePlayer(address: string) {
     lastPlayed,
     points: player?.[1],
     referrer: player?.[2],
+    refetchPlayer: refetch,
   }
 }

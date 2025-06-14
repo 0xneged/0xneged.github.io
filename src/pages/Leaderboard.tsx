@@ -3,14 +3,15 @@ import ConnectButton from 'components/ConnectButton'
 import DotsLoader from 'components/DotsLoad'
 import { getLeaderboard } from 'helpers/api/backend'
 import { cn } from 'helpers/cn'
-import getUserLink from 'helpers/getUserLink'
+import fcLinkOpen from 'helpers/fcLinkOpen'
+import { queryKeys } from 'helpers/queryClient'
 import roundNumber from 'helpers/roundNumber'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount } from 'wagmi'
 
 function LeaderboardInner({ address }: { address: EthAddressString }) {
   const { status, data } = useQuery({
-    queryKey: ['leaderboard', address],
+    queryKey: queryKeys.leaderboard(address),
     queryFn: () => getLeaderboard({ address }),
   })
 
@@ -45,10 +46,9 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
             <span className="inline-flex w-full items-center justify-between gap-2">
               <span>#{index + 1}</span>
               <a
-                href={getUserLink({
-                  address: user.address,
-                  fcUsername: user.fcUsername,
-                })}
+                onClick={() =>
+                  void fcLinkOpen({ address: user.address, fid: user.fid })
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 className="max-w-40 truncate"
