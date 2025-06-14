@@ -1,5 +1,6 @@
 import { signMessage, switchChain, writeContract } from '@wagmi/core'
 import ConnectButton from 'components/ConnectButton'
+import FeelingLuckyBlock from 'components/Navigator.tsx/FeelingLuckyBlock'
 import RoundButton from 'components/RoundButton'
 import Timer from 'components/Timer'
 import { settleGame } from 'helpers/api/backend'
@@ -93,18 +94,26 @@ function MainInner({ address }: { address: EthAddressString }) {
             </>
           )}
         </RoundButton>
-        <h2 className="text-alt text-center font-serif text-2xl">
-          <p>Feelin' lucky</p>
-          <p>today?</p>
-        </h2>
+        <FeelingLuckyBlock />
       </>
     )
-  console.log(timeout)
 
   return (
-    <h2 className="text-alt text-center font-serif text-2xl font-semibold">
-      Play again in <Timer diffTime={timeout} />
-    </h2>
+    <>
+      <RoundButton
+        style={{
+          filter: `drop-shadow(0 0.75rem rem 0 #1b1758)`,
+          transform: `translateY(0.75rem) rotateX(25deg)`,
+          opacity: 0.5,
+        }}
+      >
+        <p>Wait</p>
+      </RoundButton>
+
+      <h2 className="text-alt text-center font-serif text-2xl font-semibold">
+        Play again in <Timer diffTime={timeout} />
+      </h2>
+    </>
   )
 }
 
@@ -127,7 +136,10 @@ export default function MainPage() {
       {isConnected && address ? (
         <MainInner address={address} />
       ) : (
-        <ConnectButton />
+        <>
+          <ConnectButton />
+          <FeelingLuckyBlock />
+        </>
       )}
     </div>
   )

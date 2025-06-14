@@ -1,6 +1,7 @@
 import House from 'assets/icons/House'
 import Referral from 'assets/icons/Referral'
 import Trophy from 'assets/icons/Trophy'
+import { useAccount } from 'wagmi'
 import './LiquidMenu.css'
 import RouteCard from './Navigator.tsx/RouteCard'
 
@@ -23,6 +24,10 @@ const routes = [
 ]
 
 export default function LiquidMenu() {
+  const { isConnected } = useAccount()
+
+  if (!isConnected) return null
+
   return (
     <nav className="fixed bottom-0 w-full max-w-prose">
       <div className="wrapper m-4">

@@ -39,7 +39,7 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
             key={user.address + index}
             className={cn(
               'px-4',
-              index + 1 === lb.user?.position ? 'bg-accent-pale text-alt' : ''
+              index === lb.user?.position ? 'bg-accent-pale text-alt' : ''
             )}
           >
             <span className="inline-flex w-full items-center justify-between gap-2">

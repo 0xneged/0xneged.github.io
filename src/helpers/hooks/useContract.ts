@@ -1,6 +1,6 @@
 import { richRektContractData } from 'helpers/api/contract'
 import calculateTimeout from 'helpers/time/calculateTimeout'
-import { EthAddressString } from 'types/Blockchain'
+import type { EthAddressString } from 'types/Blockchain'
 import { useReadContract } from 'wagmi'
 import { base } from 'wagmi/chains'
 
