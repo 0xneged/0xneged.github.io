@@ -1,4 +1,4 @@
-import sdk from '@farcaster/frame-sdk'
+import sdk, { FrameNotificationDetails } from '@farcaster/frame-sdk'
 import { setNotifications } from 'helpers/api/backend'
 import hapticFeedback from 'helpers/haptic'
 import Leaderboard from 'pages/Leaderboard'
@@ -14,16 +14,28 @@ export default function AnimatedRoutes() {
   const location = useLocation()
 
   useEffect(() => {
-    if (status === 'reconnecting' || !address) return
+    if (status === 'reconnecting') return
 
     const startMiniApp = async () => {
       await sdk.actions.ready()
       await hapticFeedback()
-      const { notificationDetails } = await sdk.actions.addMiniApp()
+      await sdk.actions.addMiniApp()
+    }
+
+    void startMiniApp()
+  }, [status])
+
+  useEffect(() => {
+    if (!address) return
+
+    const setupNotifications = async ({
+      notificationDetails,
+    }: {
+      notificationDetails?: FrameNotificationDetails | undefined
+    }) => {
       if (!notificationDetails) return
 
       const { token, url } = notificationDetails
-      console.log([token, url])
       await setNotifications({
         token,
         address,
@@ -31,8 +43,14 @@ export default function AnimatedRoutes() {
       })
     }
 
-    void startMiniApp()
-  }, [address, status])
+    sdk.on('frameAdded', setupNotifications)
+    sdk.on('notificationsEnabled', setupNotifications)
+
+    return () => {
+      sdk.off('frameAdded', setupNotifications)
+      sdk.off('notificationsEnabled', setupNotifications)
+    }
+  }, [address])
 
   return (
     <Routes location={location} key={location.pathname}>
