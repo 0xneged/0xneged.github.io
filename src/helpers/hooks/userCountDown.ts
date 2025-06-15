@@ -45,6 +45,6 @@ export function useCountDownEndTime({
 
   return {
     remaining,
-    formatted: dayjs(remaining * 1000).format(format),
+    formatted: dayjs({ seconds: remaining }).format(format),
   }
 }

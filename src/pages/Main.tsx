@@ -1,4 +1,9 @@
-import { signMessage, switchChain, writeContract } from '@wagmi/core'
+import {
+  signMessage,
+  switchChain,
+  waitForTransactionReceipt,
+  writeContract,
+} from '@wagmi/core'
 import ConnectButton from 'components/ConnectButton'
 import DotsLoader from 'components/DotsLoad'
 import FeelingLuckyBlock from 'components/FeelingLuckyBlock'
@@ -6,6 +11,7 @@ import RoundButton from 'components/RoundButton'
 import Timer from 'components/Timer'
 import { settleGame } from 'helpers/api/backend'
 import { richRektContractData } from 'helpers/api/contract'
+import nullAddress from 'helpers/blockchain/nullAddress'
 import handleError from 'helpers/handleError'
 import useAnimatedLongPress from 'helpers/hooks/useAnimatedLongPress'
 import { usePlayer } from 'helpers/hooks/useContract'
@@ -19,7 +25,7 @@ import { base } from 'wagmi/chains'
 
 function MainInner({
   address,
-  refAddress = '0x0000000000000000000000000000000000000000',
+  refAddress,
 }: {
   address: EthAddressString
   refAddress: string | null
@@ -38,13 +44,15 @@ function MainInner({
       setPlaying(true)
       await switchChain(config, { chainId: base.id })
       if (!hasPendingRequest) {
-        console.log(import.meta.env['VITE_CONTRACT_ADDRESS'])
-        await writeContract(config, {
+        const ref = refAddress ? refAddress : nullAddress
+
+        const hash = await writeContract(config, {
           ...richRektContractData,
           chainId: base.id,
           functionName: 'requestPlay',
-          args: [refAddress as EthAddressString],
+          args: [ref as EthAddressString],
         })
+        await waitForTransactionReceipt(config, { hash })
       }
       const signature = await signMessage(config, {
         message: `Oh, random, may I be a winner`,
@@ -56,7 +64,7 @@ function MainInner({
       } = await settleGame({ address, signature })
 
       await refetchPlayer()
-      setTimeout(() => invalidateQuery(queryKeys.leaderboard(address)))
+      setTimeout(() => invalidateQuery(queryKeys.leaderboard))
 
       toast.success(`Nice, your reward is ${reward}`)
     } catch (e) {

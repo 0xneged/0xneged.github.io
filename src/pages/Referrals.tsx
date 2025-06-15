@@ -4,6 +4,8 @@ import DotsLoader from 'components/DotsLoad'
 import ShareRefButton from 'components/ShareRefButton'
 import UserList from 'components/UserList'
 import { getRefs } from 'helpers/api/backend'
+import env from 'helpers/env'
+import fcLinkOpen from 'helpers/fcLinkOpen'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount } from 'wagmi'
 
@@ -42,6 +44,14 @@ export default function Referrals() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-y-2 overflow-y-auto">
       {address ? <ReferralsInner address={address} /> : <ConnectButton />}
+
+      <a
+        className="text-alt cursor-pointer justify-self-end text-center font-serif text-sm"
+        onClick={() => fcLinkOpen({ address: env.VITE_CONTRACT_ADDRESS })}
+      >
+        CA:
+        {env.VITE_CONTRACT_ADDRESS}
+      </a>
     </div>
   )
 }

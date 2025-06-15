@@ -9,7 +9,7 @@ import { useAccount } from 'wagmi'
 
 function LeaderboardInner({ address }: { address: EthAddressString }) {
   const { status, data } = useQuery({
-    queryKey: queryKeys.leaderboard(address),
+    queryKey: queryKeys.leaderboard,
     queryFn: () => getLeaderboard({ address }),
   })
 

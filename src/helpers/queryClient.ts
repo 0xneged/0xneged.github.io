@@ -1,13 +1,15 @@
 import { QueryClient } from '@tanstack/react-query'
 
+const queryClient = new QueryClient()
+
 export const queryKeys = {
-  leaderboard: (address: string) => ['leaderboard', address],
+  leaderboard: ['leaderboard'],
 }
 
 export function invalidateQuery(key: string[]) {
-  return new QueryClient().invalidateQueries({
+  return queryClient.invalidateQueries({
     queryKey: key,
   })
 }
 
-export default new QueryClient()
+export default queryClient

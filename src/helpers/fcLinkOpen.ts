@@ -7,7 +7,7 @@ export default function fcLinkOpen({
   fid,
 }: {
   address: string
-  fid: number | undefined
+  fid?: number | undefined
 }) {
   if (fid) return viewProfile({ fid })
   return openUrl(`https://basescan.org/address/${address}`)
