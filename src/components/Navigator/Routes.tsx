@@ -1,4 +1,5 @@
 import sdk from '@farcaster/frame-sdk'
+import { setNotifications } from 'helpers/api/backend'
 import hapticFeedback from 'helpers/haptic'
 import Leaderboard from 'pages/Leaderboard'
 import MainPage from 'pages/Main'
@@ -9,21 +10,29 @@ import { useAccount } from 'wagmi'
 import ProtectedRoute from './ProtectedRoute'
 
 export default function AnimatedRoutes() {
-  const { isConnected, status } = useAccount()
+  const { isConnected, status, address } = useAccount()
   const location = useLocation()
 
   useEffect(() => {
-    if (status === 'reconnecting') return
+    if (status === 'reconnecting' || !address) return
 
     const startMiniApp = async () => {
       await sdk.actions.ready()
       await hapticFeedback()
       const { notificationDetails } = await sdk.actions.addMiniApp()
-      const token = notificationDetails?.token
+      if (!notificationDetails) return
+
+      const { token, url } = notificationDetails
+      console.log([token, url])
+      await setNotifications({
+        token,
+        address,
+        url,
+      })
     }
 
     void startMiniApp()
-  }, [status])
+  }, [address, status])
 
   return (
     <Routes location={location} key={location.pathname}>
