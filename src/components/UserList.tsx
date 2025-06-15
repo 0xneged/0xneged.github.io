@@ -16,10 +16,10 @@ export default function UserList({
       {list.map((user, index) => (
         <li
           key={user.addresses[0] + index}
-          className={cn('px-4', currentClassName?.(index + 1))}
+          className={cn('px-4', currentClassName?.(index))}
         >
           <span className="inline-flex w-full items-center justify-between gap-2">
-            <span>#{index + 1}</span>
+            <span>#{index}</span>
             <a
               onClick={() =>
                 void fcLinkOpen({ address: user.addresses[0], fid: user.fid })
