@@ -44,8 +44,7 @@ export default function MiniApp() {
     sdk.on('notificationsEnabled', setupNotifications)
 
     return () => {
-      sdk.off('frameAdded', setupNotifications)
-      sdk.off('notificationsEnabled', setupNotifications)
+      sdk.removeAllListeners()
     }
   }, [address])
 
