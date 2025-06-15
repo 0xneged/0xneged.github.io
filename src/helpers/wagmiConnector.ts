@@ -1,3 +1,4 @@
+import { farcasterFrame } from '@farcaster/frame-wagmi-connector'
 import { createConfig, http } from 'wagmi'
 import { base } from 'wagmi/chains'
 
@@ -7,5 +8,5 @@ export const config = createConfig({
     [base.id]: http(),
   },
 
-  // connectors: [miniAppConnector()],
+  connectors: [farcasterFrame()],
 })

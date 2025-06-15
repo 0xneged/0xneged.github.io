@@ -38,6 +38,7 @@ function MainInner({
       setPlaying(true)
       await switchChain(config, { chainId: base.id })
       if (!hasPendingRequest) {
+        console.log(import.meta.env['VITE_CONTRACT_ADDRESS'])
         await writeContract(config, {
           ...richRektContractData,
           chainId: base.id,
