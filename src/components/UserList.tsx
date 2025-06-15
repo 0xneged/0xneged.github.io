@@ -16,7 +16,7 @@ export default function UserList({
       {list.map((user, index) => (
         <li
           key={user.addresses[0] + index}
-          className={cn('px-4', currentClassName?.(index))}
+          className={cn('px-4', currentClassName?.(index + 1))}
         >
           <span className="inline-flex w-full items-center justify-between gap-2">
             <span>#{index + 1}</span>

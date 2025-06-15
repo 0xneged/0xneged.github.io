@@ -22,6 +22,7 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
     )
 
   const lb = data.data
+  const positionOffset = lb.user?.position ? lb.user.position - 1 : -1
 
   return (
     <ul className="relative flex h-full w-full flex-col overflow-y-auto">
@@ -29,13 +30,13 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
         <span className="font-serif font-bold">Leaderboard</span>
         <span className="inline-flex gap-x-8">
           <span>Balance: {lb.user?.balance} $RR</span>
-          <span>Position: #{Number(lb.user?.position) + 1}</span>
+          <span>Position: #{positionOffset}</span>
         </span>
       </li>
       <UserList
         list={lb.top}
         currentClassName={(index) =>
-          index === lb.user?.position ? 'bg-accent-pale text-alt' : ''
+          index === positionOffset ? 'bg-accent-pale text-alt' : ''
         }
       />
     </ul>
