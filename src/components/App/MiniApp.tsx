@@ -30,6 +30,7 @@ export default function MiniApp() {
     }: {
       notificationDetails?: FrameNotificationDetails | undefined
     }) => {
+      console.table(notificationDetails)
       if (!notificationDetails) return
 
       const { token, url } = notificationDetails
