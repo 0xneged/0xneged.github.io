@@ -1,5 +1,5 @@
 export default interface User {
-  address: string
+  addresses: string[]
   balance: number
   fid: number | undefined
   fcUsername: string | undefined

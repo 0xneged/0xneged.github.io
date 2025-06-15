@@ -18,7 +18,8 @@ export default function AnimatedRoutes() {
     const startMiniApp = async () => {
       await sdk.actions.ready()
       await hapticFeedback()
-      await sdk.actions.addMiniApp()
+      const { notificationDetails } = await sdk.actions.addMiniApp()
+      const token = notificationDetails?.token
     }
 
     void startMiniApp()
