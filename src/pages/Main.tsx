@@ -1,3 +1,4 @@
+import sdk from '@farcaster/frame-sdk'
 import {
   signMessage,
   switchChain,
@@ -19,7 +20,7 @@ import useAnimatedLongPress from 'helpers/hooks/useAnimatedLongPress'
 import { usePlayer } from 'helpers/hooks/useContract'
 import { invalidateQuery, queryKeys } from 'helpers/queryClient'
 import { config } from 'helpers/wagmiConnector'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import { toast } from 'react-toastify'
 import { EthAddressString } from 'types/Blockchain'
@@ -143,9 +144,21 @@ function MainInner({
 
 export default function MainPage() {
   const { isConnected, address } = useAccount()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const refAddress = searchParams.get('ref')
+  useEffect(() => {
+    console.log(searchParams.getAll('ref'))
+    void sdk.context.then(({ location }) => {
+      console.log('sdk location', location)
+      console.log(new URLSearchParams(window.location.search).getAll('ref'))
+
+      if (location && 'embed' in location) {
+        const url = new URL(location.embed)
+        const newParams = new URLSearchParams(url.search)
+        setSearchParams(newParams)
+      }
+    })
+  }, [searchParams, setSearchParams])
 
   return (
     <div className="mb-32 flex h-full w-full flex-col items-center justify-between overflow-y-auto py-4">
@@ -162,7 +175,7 @@ export default function MainPage() {
       </h1>
 
       {isConnected && address ? (
-        <MainInner address={address} refAddress={refAddress} />
+        <MainInner address={address} refAddress={searchParams.get('ref')} />
       ) : (
         <>
           <ConnectButton />
