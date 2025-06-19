@@ -14,7 +14,7 @@
     "expose-dev": "cloudflared tunnel --url http://localhost:5173"
   },
   "dependencies": {
-    "@0xneged/rich-rekt-contract": "^1.2.2",
+    "@0xneged/rich-rekt-contract": "^1.2.3",
     "@farcaster/frame-sdk": "^0.0.60",
     "@farcaster/frame-wagmi-connector": "^0.0.49",
     "@formkit/auto-animate": "^0.8.2",

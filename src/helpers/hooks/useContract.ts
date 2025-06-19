@@ -3,7 +3,6 @@ import calculateTimeout from 'helpers/time/calculateTimeout'
 import { useEffect, useState } from 'react'
 import type { EthAddressString } from 'types/Blockchain'
 import { useReadContract } from 'wagmi'
-import { base } from 'wagmi/chains'
 
 export function usePlayer(address: string) {
   const [loading, setLoading] = useState(true)
@@ -13,14 +12,17 @@ export function usePlayer(address: string) {
     status,
   } = useReadContract({
     ...richRektContractData,
-    chainId: base.id,
     functionName: 'getPlayer',
     args: [address as EthAddressString],
   })
+  const { data, status: cooldownStatus } = useReadContract({
+    ...richRektContractData,
+    functionName: 'playCooldownHours',
+  })
 
   useEffect(() => {
-    setLoading(status !== 'success')
-  }, [status])
+    setLoading(status !== 'success' && cooldownStatus !== 'success')
+  }, [cooldownStatus, status])
 
   const lastPlayed = player ? Number(player[0]) * 1000 : 0
 
@@ -28,8 +30,10 @@ export function usePlayer(address: string) {
     loading,
     setLoading,
 
-    endTime: loading ? null : calculateTimeout(lastPlayed),
-    canPlay: loading ? false : calculateTimeout(lastPlayed) < Date.now(),
+    endTime: loading ? null : calculateTimeout(lastPlayed, Number(data)),
+    canPlay: loading
+      ? false
+      : calculateTimeout(lastPlayed, Number(data)) < Date.now(),
     lastPlayed,
     points: player?.[1],
     referrer: player?.[2],
