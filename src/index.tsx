@@ -5,7 +5,7 @@ import App from 'components/App'
 import queryClient from 'helpers/queryClient'
 import { config } from 'helpers/wagmiConnector'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router'
+import { HashRouter } from 'react-router'
 import { WagmiProvider } from 'wagmi'
 
 import { MiniAppProvider } from '@neynar/react'
@@ -19,7 +19,7 @@ dayjs.extend(utc)
 dayjs.extend(duration)
 
 createRoot(document.getElementById('root') as Element).render(
-  <BrowserRouter>
+  <HashRouter>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <MiniAppProvider>
@@ -27,5 +27,5 @@ createRoot(document.getElementById('root') as Element).render(
         </MiniAppProvider>
       </QueryClientProvider>
     </WagmiProvider>
-  </BrowserRouter>
+  </HashRouter>
 )
