@@ -21,7 +21,7 @@ import { config } from 'helpers/wagmiConnector'
 import { useCallback, useState } from 'react'
 import { toast } from 'react-toastify'
 import { EthAddressString } from 'types/Blockchain'
-import { useAccount, useReadContract } from 'wagmi'
+import { useAccount } from 'wagmi'
 import { base } from 'wagmi/chains'
 
 function MainInner({
@@ -32,13 +32,8 @@ function MainInner({
   refAddress: string | null
 }) {
   const [playing, setPlaying] = useState(false)
-  const { endTime, refetchPlayer, loading, canPlay } = usePlayer(address)
-  const { data: hasPendingRequest } = useReadContract({
-    ...richRektContractData,
-    chainId: base.id,
-    functionName: 'hasPendingRequest',
-    args: [address],
-  })
+  const { endTime, refetchPlayer, loading, canPlay, hasPendingRequest } =
+    usePlayer(address)
 
   const handleGame = useCallback(async () => {
     try {

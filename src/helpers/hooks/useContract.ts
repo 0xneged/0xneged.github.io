@@ -19,6 +19,11 @@ export function usePlayer(address: string) {
     ...richRektContractData,
     functionName: 'playCooldownHours',
   })
+  const { data: hasPendingRequest } = useReadContract({
+    ...richRektContractData,
+    functionName: 'hasPendingRequest',
+    args: [address as EthAddressString],
+  })
 
   useEffect(() => {
     setLoading(status !== 'success' && cooldownStatus !== 'success')
@@ -30,6 +35,7 @@ export function usePlayer(address: string) {
     loading,
     setLoading,
 
+    hasPendingRequest,
     endTime: loading ? null : calculateTimeout(lastPlayed, Number(data)),
     canPlay: loading
       ? false

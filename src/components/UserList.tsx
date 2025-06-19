@@ -1,6 +1,7 @@
 import { cn } from 'helpers/cn'
 import fcLinkOpen from 'helpers/fcLinkOpen'
 import roundNumber from 'helpers/roundNumber'
+import truncate from 'helpers/truncate'
 import { ClassName } from 'types/Props'
 import User from 'types/User'
 
@@ -26,9 +27,9 @@ export default function UserList({
               }
               target="_blank"
               rel="noopener noreferrer"
-              className="max-w-40 cursor-pointer truncate"
+              className="max-w-40 cursor-pointer"
             >
-              {user.fcUsername || user.addresses[0]}
+              {truncate({ fullString: user.fcUsername || user.addresses[0] })}
             </a>
             <span>{roundNumber(user.balance)} $RR</span>
           </span>

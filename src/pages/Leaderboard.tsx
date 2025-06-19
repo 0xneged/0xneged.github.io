@@ -22,7 +22,7 @@ function LeaderboardInner({ address }: { address: EthAddressString }) {
     )
 
   const lb = data.data
-  const positionOffset = lb.user?.position ? lb.user.position : -1
+  const positionOffset = lb.user?.position !== undefined ? lb.user.position : -1
 
   return (
     <ul className="relative flex h-full w-full flex-col overflow-y-auto">
