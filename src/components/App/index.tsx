@@ -11,9 +11,7 @@ export default function App() {
   useEffect(() => {
     void sdk
       .isInMiniApp()
-      .then((isMiniApp) => {
-        setIsMiniApp(isMiniApp)
-      })
+      .then(setIsMiniApp)
       .finally(() => {
         setLoading(false)
       })

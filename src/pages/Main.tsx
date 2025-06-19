@@ -19,7 +19,6 @@ import { usePlayer } from 'helpers/hooks/useContract'
 import { invalidateQuery, queryKeys } from 'helpers/queryClient'
 import { config } from 'helpers/wagmiConnector'
 import { useCallback, useState } from 'react'
-import { useLocation } from 'react-router'
 import { toast } from 'react-toastify'
 import { EthAddressString } from 'types/Blockchain'
 import { useAccount } from 'wagmi'
@@ -131,11 +130,10 @@ function MainInner({
 
 export default function MainPage() {
   const { isConnected, address } = useAccount()
-  const location = useLocation()
-  const searchParams = new URLSearchParams(location.search)
+  const searchParams = new URLSearchParams(window.location.search)
   const refAddress = searchParams.get('ref')
 
-  console.table({ refAddress, location, params: window.location })
+  console.table({ refAddress, params: window.location })
 
   return (
     <div className="mb-32 flex h-full w-full flex-col items-center justify-between overflow-y-auto py-4">
