@@ -22,6 +22,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      external: ['@pigment-css/react', 'hls.js'],
       plugins: [
         visualizer({
           gzipSize: true,
