@@ -15,9 +15,9 @@ export default function fcLinkOpen({
 }
 
 export function sharePost(address: string) {
-  console.table({ toShare: `${env.VITE_APP_URL}?ref=${address}` })
+  console.table({ toShare: `${env.VITE_APP_URL}/main?ref=${address}` })
   void composeCast({
     text: 'get Rich or get Rekt',
-    embeds: [`${env.VITE_APP_URL}?ref=${address}`],
+    embeds: [`${env.VITE_APP_URL}/main?ref=${address}`],
   })
 }

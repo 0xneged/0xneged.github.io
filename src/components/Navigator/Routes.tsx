@@ -14,6 +14,7 @@ export default function AnimatedRoutes({
   return (
     <Routes location={location} key={location.pathname}>
       <Route path="/" element={<MainPage />} />
+      <Route path="/main" element={<MainPage />} />
       <Route element={<ProtectedRoute isAllowed={isConnected} />}>
         <Route path="leaderboard" element={<Leaderboard />} />
         <Route path="refs" element={<Referrals />} />
