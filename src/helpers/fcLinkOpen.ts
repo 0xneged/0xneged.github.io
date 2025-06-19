@@ -18,6 +18,6 @@ export function sharePost(address: string) {
   console.table({ toShare: `${env.VITE_APP_URL}/main?ref=${address}` })
   void composeCast({
     text: 'get Rich or get Rekt',
-    embeds: [`${env.VITE_APP_URL}/main?ref=${address}`],
+    embeds: [encodeURI(`${env.VITE_APP_URL}/main?ref=${address}`)],
   })
 }
