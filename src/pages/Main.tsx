@@ -160,6 +160,8 @@ export default function MainPage() {
     })
   }, [searchParams, setSearchParams])
 
+  console.log(['result params', searchParams.get('ref')])
+
   return (
     <div className="mb-32 flex h-full w-full flex-col items-center justify-between overflow-y-auto py-4">
       <h1
