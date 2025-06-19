@@ -13,6 +13,7 @@
     "buttonTitle": "get Rich or get Rekt 😎",
     "splashImageUrl": "https://0xneged.github.io/favicon/web-app-manifest-512x512.png",
     "splashBackgroundColor": "#0f0d26",
-    "primaryCategory": "games"
+    "primaryCategory": "games",
+    "webhookUrl": "https://api.neynar.com/f/app/aeb3e338-9a88-4df1-be03-551a6692a230/event"
   }
 }

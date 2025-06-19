@@ -1226,6 +1226,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@neynar/react@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "@neynar/react@npm:1.2.3"
+  peerDependencies:
+    "@farcaster/frame-sdk": ">=0.0.53 <1.0.0"
+    "@pigment-css/react": ^0.0.30
+    hls.js: ^1.5.20
+    mipd: ">=0.0.7 <1.0.0"
+    react: ^19.0.0
+    react-dom: ^19.0.0
+    swr: ^2.3.2
+  checksum: 10c0/e036048ffa452641d202062d153839f2451940c3e0ba4c4a8dba507bc3bd4f42ade8c84d87409ad28aa7f5dd979439e586a27c8e276021a1b780f1fd6cbcd337
+  languageName: node
+  linkType: hard
+
 "@noble/ciphers@npm:1.2.1":
   version: 1.2.1
   resolution: "@noble/ciphers@npm:1.2.1"
@@ -5819,6 +5834,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-confetti@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "js-confetti@npm:0.12.0"
+  checksum: 10c0/2193967fae725e12e2d132b53d075c0ba4a100cedba6b039ba70c9776e0ea7743cd8e7167931c0f3960df104e1a21e9b3a9d7ffc32127437d089c82e8ddd627f
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -7567,6 +7589,7 @@ __metadata:
     "@farcaster/frame-sdk": "npm:^0.0.60"
     "@farcaster/frame-wagmi-connector": "npm:^0.0.49"
     "@formkit/auto-animate": "npm:^0.8.2"
+    "@neynar/react": "npm:^1.2.3"
     "@tailwindcss/typography": "npm:^0.5.16"
     "@tailwindcss/vite": "npm:^4.1.5"
     "@tanstack/react-query": "npm:^5.80.6"
@@ -7589,6 +7612,7 @@ __metadata:
     eslint-plugin-tailwindcss: "npm:^3.18.0"
     framer-motion: "npm:^12.9.4"
     jotai: "npm:^2.12.1"
+    js-confetti: "npm:^0.12.0"
     lovable-tagger: "npm:^1.1.8"
     prettier: "npm:^3.5.3"
     prettier-plugin-tailwindcss: "npm:^0.6.11"

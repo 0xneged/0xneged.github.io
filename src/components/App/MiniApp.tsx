@@ -34,11 +34,12 @@ export default function MiniApp() {
       if (!notificationDetails) return
 
       const { token, url } = notificationDetails
-      await setNotifications({
+      const { data } = await setNotifications({
         token,
         address,
         url,
       })
+      console.log([token, url, data.success])
     }
 
     sdk.on('frameAdded', setupNotifications)

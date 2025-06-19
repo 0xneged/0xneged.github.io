@@ -35,7 +35,7 @@ export function setNotifications({
   url: string
   address: string
 }) {
-  return backend.post('/user/set-notifications', {
+  return backend.post<{ success: boolean }>('/user/set-notifications', {
     token,
     url,
     address,

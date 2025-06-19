@@ -12,6 +12,7 @@ import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import objectSupport from 'dayjs/plugin/objectSupport'
 import utc from 'dayjs/plugin/utc'
+import { MiniAppProvider } from '@neynar/react'
 
 dayjs.extend(objectSupport)
 dayjs.extend(utc)
@@ -21,7 +22,9 @@ createRoot(document.getElementById('root') as Element).render(
   <HashRouter>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <App />
+        <MiniAppProvider>
+          <App />
+        </MiniAppProvider>
       </QueryClientProvider>
     </WagmiProvider>
   </HashRouter>

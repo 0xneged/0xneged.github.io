@@ -12,6 +12,7 @@ import Timer from 'components/Timer'
 import { settleGame } from 'helpers/api/backend'
 import { richRektContractData } from 'helpers/api/contract'
 import nullAddress from 'helpers/blockchain/nullAddress'
+import { failConfetti, successConfetti } from 'helpers/confetti'
 import handleError from 'helpers/handleError'
 import useAnimatedLongPress from 'helpers/hooks/useAnimatedLongPress'
 import { usePlayer } from 'helpers/hooks/useContract'
@@ -66,7 +67,13 @@ function MainInner({
       await refetchPlayer()
       setTimeout(() => invalidateQuery(queryKeys.leaderboard))
 
-      toast.success(`Nice, your reward is ${reward}`)
+      if (reward < 100) {
+        toast.warn(`REKT! Your reward is ${reward}`)
+        await failConfetti()
+      } else {
+        toast.success(`RICH! Your reward is ${reward}`)
+        await successConfetti()
+      }
     } catch (e) {
       handleError({ e, toastMessage: 'Failed to play :(' })
     } finally {
