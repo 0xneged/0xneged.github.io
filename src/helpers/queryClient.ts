@@ -3,7 +3,7 @@ import { QueryClient } from '@tanstack/react-query'
 const queryClient = new QueryClient()
 
 export const queryKeys = {
-  leaderboard: ['leaderboard'],
+  leaderboard: (address: string) => ['leaderboard', address],
 }
 
 export function invalidateQuery(key: string[]) {

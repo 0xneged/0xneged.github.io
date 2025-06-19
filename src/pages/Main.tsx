@@ -65,7 +65,7 @@ function MainInner({
       } = await settleGame({ address, signature })
 
       await refetchPlayer()
-      setTimeout(() => invalidateQuery(queryKeys.leaderboard))
+      setTimeout(() => invalidateQuery(queryKeys.leaderboard(address)))
 
       if (reward < 100) {
         toast.warn(`REKT! Your reward is ${reward}`)
