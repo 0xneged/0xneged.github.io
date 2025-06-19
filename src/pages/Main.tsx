@@ -135,7 +135,7 @@ export default function MainPage() {
   const searchParams = new URLSearchParams(location.search)
   const refAddress = searchParams.get('ref')
 
-  console.table({ refAddress })
+  console.table({ refAddress, location })
 
   return (
     <div className="mb-32 flex h-full w-full flex-col items-center justify-between overflow-y-auto py-4">
