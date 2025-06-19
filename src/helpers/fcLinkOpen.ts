@@ -14,10 +14,10 @@ export default function fcLinkOpen({
   return openUrl(`https://basescan.org/address/${address}`)
 }
 
-export function sharePost(address: string) {
+export function sharePost(address: string, text = 'get Rich or get Rekt') {
   console.table({ toShare: `${env.VITE_APP_URL}/main?ref=${address}` })
   void composeCast({
-    text: 'get Rich or get Rekt',
+    text,
     embeds: [encodeURI(`${env.VITE_APP_URL}/main?ref=${address}`)],
   })
 }

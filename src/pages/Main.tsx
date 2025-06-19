@@ -5,6 +5,7 @@ import {
   writeContract,
 } from '@wagmi/core'
 import ConnectButton from 'components/ConnectButton'
+import Dialog from 'components/Dialog'
 import DotsLoader from 'components/DotsLoad'
 import FeelingLuckyBlock from 'components/FeelingLuckyBlock'
 import RoundButton from 'components/RoundButton'
@@ -34,6 +35,11 @@ function MainInner({
   const [playing, setPlaying] = useState(false)
   const { endTime, refetchPlayer, loading, canPlay, hasPendingRequest } =
     usePlayer(address)
+  const [openDialog, setOpenDialog] = useState<{
+    address?: string
+    description?: string
+    open: boolean
+  }>({ open: false })
 
   const handleGame = useCallback(async () => {
     try {
@@ -69,6 +75,11 @@ function MainInner({
         toast.success(`RICH! Your reward is ${reward}`)
         await successConfetti()
       }
+      setOpenDialog({
+        address,
+        description: `Oh wow, I won ${reward} $RR\nget Rich 👉👌 or get Rekt 🥵`,
+        open: true,
+      })
     } catch (e) {
       handleError({ e, toastMessage: 'Failed to play :(' })
     } finally {
@@ -106,6 +117,7 @@ function MainInner({
           )}
         </RoundButton>
         <FeelingLuckyBlock />
+        <Dialog {...openDialog} setOpen={setOpenDialog} />
       </>
     )
 
