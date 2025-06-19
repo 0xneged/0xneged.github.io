@@ -1,14 +1,13 @@
-import sdk, { FrameNotificationDetails } from '@farcaster/frame-sdk'
+import sdk from '@farcaster/frame-sdk'
 import Navigator from 'components/Navigator/Navigator'
 import Routes from 'components/Navigator/Routes'
-import { setNotifications } from 'helpers/api/backend'
 import hapticFeedback from 'helpers/haptic'
 import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { useAccount } from 'wagmi'
 
 export default function MiniApp() {
-  const { isConnected, status, address } = useAccount()
+  const { isConnected, status } = useAccount()
 
   useEffect(() => {
     if (status === 'reconnecting') return
@@ -21,34 +20,6 @@ export default function MiniApp() {
 
     void startMiniApp()
   }, [status])
-
-  useEffect(() => {
-    if (!address) return
-
-    const setupNotifications = async ({
-      notificationDetails,
-    }: {
-      notificationDetails?: FrameNotificationDetails | undefined
-    }) => {
-      console.table(notificationDetails)
-      if (!notificationDetails) return
-
-      const { token, url } = notificationDetails
-      const { data } = await setNotifications({
-        token,
-        address,
-        url,
-      })
-      console.log([token, url, data.success])
-    }
-
-    sdk.on('frameAdded', setupNotifications)
-    sdk.on('notificationsEnabled', setupNotifications)
-
-    return () => {
-      sdk.removeAllListeners()
-    }
-  }, [address])
 
   return (
     <>
