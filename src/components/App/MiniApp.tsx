@@ -1,4 +1,5 @@
 import sdk from '@farcaster/frame-sdk'
+import WelcomeDialog from 'components/Dialog/WelcomeDialog'
 import Navigator from 'components/Navigator/Navigator'
 import Routes from 'components/Navigator/Routes'
 import hapticFeedback from 'helpers/haptic'
@@ -10,6 +11,7 @@ export default function MiniApp() {
   const { isConnected, status } = useAccount()
 
   useEffect(() => {
+    console.log(['status', status])
     if (status === 'reconnecting') return
 
     const startMiniApp = async () => {
@@ -23,6 +25,7 @@ export default function MiniApp() {
 
   return (
     <>
+      {isConnected ? <WelcomeDialog /> : null}
       <Routes isConnected={isConnected} />
       <Navigator />
       <ToastContainer

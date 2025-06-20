@@ -1,10 +1,8 @@
-import JSConfetti from 'js-confetti'
-
-const jsConfetti = new JSConfetti()
+import { readAtom } from 'helpers/atoms/atomStore'
+import jsConfettiAtom from 'helpers/atoms/jsConfettiAtom'
 
 export const successConfetti = () =>
-  jsConfetti.addConfetti({
-    emojis: ['💸'],
-  })
+  readAtom(jsConfettiAtom).addConfetti({ emojis: ['💸', '🤑'] })
 
-export const failConfetti = () => jsConfetti.addConfetti({ emojis: ['📉'] })
+export const failConfetti = () =>
+  readAtom(jsConfettiAtom).addConfetti({ emojis: ['😓', '📉', '🥀'] })
